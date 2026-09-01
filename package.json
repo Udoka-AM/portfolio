@@ -6,15 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx --yes serve out",
-    "lint": "next lint",
-    "deploy": "npm run build && wrangler pages deploy out --project-name=portfolio"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "^16.3.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
-  },
-  "devDependencies": {
-    "wrangler": "^4.128.0"
   }
 }
