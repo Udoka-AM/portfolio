@@ -2,8 +2,8 @@
    faster than a card per entry. */
 .entry {
   display: grid;
-  /* Third track is the hover arrow, which is a grid item too. */
-  grid-template-columns: 260px 1fr auto;
+  /* Third track is the link-out button. */
+  grid-template-columns: 260px minmax(0, 1fr) 132px;
   gap: 28px;
   padding: 20px 0;
   border-bottom: 1px solid var(--rule);
@@ -50,20 +50,26 @@
   color: var(--muted);
 }
 
-.entry::after {
-  content: "→";
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 13px;
-  color: var(--debit);
-  opacity: 0;
-  transition: opacity 180ms var(--ease), transform 180ms var(--ease);
-  transform: translateX(-4px);
+.cta {
   align-self: center;
+  justify-self: end;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 7px 12px;
+  white-space: nowrap;
+  transition: border-color 180ms var(--ease), color 180ms var(--ease),
+    background 180ms var(--ease);
 }
 
-.entry:hover::after {
-  opacity: 1;
-  transform: translateX(0);
+.entry:hover .cta {
+  border-color: var(--debit);
+  color: var(--debit);
+  background: var(--surface);
 }
 
 @media (max-width: 760px) {
@@ -71,7 +77,8 @@
     grid-template-columns: 1fr;
     gap: 6px;
   }
-  .entry::after {
-    display: none;
+  .cta {
+    justify-self: start;
+    margin-top: 4px;
   }
 }

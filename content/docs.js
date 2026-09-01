@@ -11,13 +11,15 @@ export const DOCS = [
   {
     name: "Solana Developer Resources",
     where: "GitHub",
+    cta: "View repo",
     href: "https://github.com/Udoka-AM/Solana-developer-resources",
     line:
-      "An open collection for getting started on Solana — the reading, tooling, and reference material worth having in order, rather than scattered across a dozen tabs.",
+      "Reading, tooling, and reference material for getting started on Solana, kept in order rather than scattered.",
   },
   {
     name: "Arc",
     where: "Mintlify",
+    cta: "Read docs",
     href: "https://arc-doc.mintlify.site/",
     line:
       "Ledger invariants, the settlement state machine, and the chaos suite that proves them.",
@@ -25,6 +27,7 @@ export const DOCS = [
   {
     name: "Agents Circle",
     where: "Mintlify",
+    cta: "Read docs",
     href: "https://agent-circle.mintlify.app/",
     line:
       "One specification, two runtimes: PDA custody on Solana against a singleton on EVM.",
@@ -32,6 +35,7 @@ export const DOCS = [
   {
     name: "RetinaOS",
     where: "Mintlify",
+    cta: "Read docs",
     href: "https://retinaos.mintlify.app/",
     line:
       "Public API surface, refresh ceilings, and the wallet reputation model, stated up front.",

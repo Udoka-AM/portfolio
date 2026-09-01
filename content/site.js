@@ -4,9 +4,9 @@ export const SITE = {
   name: "Udoka A.M.",
   role: "Software engineer",
   intro:
-    "Software engineer building backend, blockchain, and cloud infrastructure and making it usable by the developers who adopt it.",
+    "Software engineer building around blockchain, AI and cloud technologies and making it usable by the developers who adopt it.",
   focus:
-    "Currently focused on agentic finance, stablecoin rails, and onchain markets. Nigeria, open to relocation.",
+    "Currently interested in agentic finance, cross-border stablecoin rails, onchain markets, and data security infrastructure.",
   // Used for <title>, og:title, and the JSON-LD person block.
   tagline: "Backend, blockchain, and developer-facing infrastructure.",
 };

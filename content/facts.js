@@ -21,9 +21,9 @@ export const FACTS = [
     note: "Hours are an input, not an outcome",
   },
   {
-    key: "Systems shipped",
-    value: "7",
-    note: "Arc · Agents Circle · RetinaOS · bagsMarkets · Orynth · Fiat-Crypto Tracker · StakeZone",
+    key: "Events",
+    value: "20+",
+    note: "Conference talks, workshops, and livestreams — including the MagicBlock integration workshop at Web3Lagos 2025",
   },
   {
     key: "Ecosystems served",
