@@ -1,30 +1,38 @@
-.grid {
+/* A list, not tiles: the docs are a reference index, and a row per entry reads
+   faster than a card per entry. */
+.entry {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 20px;
-}
-
-.tile {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  padding: 20px;
-  border: 1px solid var(--rule);
-  background: var(--surface);
+  /* Third track is the hover arrow, which is a grid item too. */
+  grid-template-columns: 260px 1fr auto;
+  gap: 28px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
   text-decoration: none;
   color: inherit;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 200ms var(--ease), background 200ms var(--ease);
+  transition: background 180ms var(--ease);
 }
 
-.tile:hover {
-  border-color: var(--debit);
+.entry:hover {
   background: var(--raise);
 }
 
-.tile:hover .name {
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  transition: color 180ms var(--ease);
+}
+
+.entry:hover .name {
   color: var(--debit);
 }
 
@@ -36,32 +44,34 @@
   color: var(--muted);
 }
 
-.name {
-  font-family: var(--font-display), sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  letter-spacing: -0.015em;
-  transition: color 200ms var(--ease);
-}
-
 .line {
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.55;
   color: var(--muted);
 }
 
-.action {
-  margin-top: auto;
-  padding-top: 12px;
+.entry::after {
+  content: "→";
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 13px;
   color: var(--debit);
+  opacity: 0;
+  transition: opacity 180ms var(--ease), transform 180ms var(--ease);
+  transform: translateX(-4px);
+  align-self: center;
 }
 
-.action::after { content: " →"; }
+.entry:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
 
-@media (max-width: 620px) {
-  .grid { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 760px) {
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .entry::after {
+    display: none;
+  }
 }

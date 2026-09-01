@@ -6,22 +6,21 @@ export default function DocsList() {
     <section className="section" id="docs">
       <h2 className="sectionHead">Documentation</h2>
 
-      <div className={s.grid}>
-        {DOCS.map((d) => (
-          <a
-            key={d.name}
-            className={`tile-interactive ${s.tile}`}
-            href={d.href}
-            target="_blank"
-            rel="noopener"
-          >
-            <span className={s.where}>[{d.where}]</span>
+      {DOCS.map((d) => (
+        <a
+          key={d.name}
+          className={s.entry}
+          href={d.href}
+          target="_blank"
+          rel="noopener"
+        >
+          <div className={s.head}>
             <h3 className={s.name}>{d.name}</h3>
-            <p className={s.line}>{d.line}</p>
-            <span className={s.action}>Read the docs</span>
-          </a>
-        ))}
-      </div>
+            <span className={s.where}>{d.where}</span>
+          </div>
+          <p className={s.line}>{d.line}</p>
+        </a>
+      ))}
     </section>
   );
 }

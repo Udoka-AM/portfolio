@@ -15,6 +15,22 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: background 180ms var(--ease);
+}
+
+/* Light lift on hover. The cell is opaque over the page lattice, so raising
+   it a shade is enough to pick it out without a border change fighting the
+   1px seams the grid gap already draws. */
+.cell:hover {
+  background: var(--raise);
+}
+
+.cell:hover .k {
+  color: var(--debit);
+}
+
+.k {
+  transition: color 180ms var(--ease);
 }
 
 .wide {
