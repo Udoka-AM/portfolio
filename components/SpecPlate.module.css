@@ -1,0 +1,75 @@
+/* A hairline grid: the 1px gap over a rule-coloured ground draws every divider,
+   so no cell needs its own border and none of them double up at the seams. */
+.plate {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-bottom: 90px;
+}
+
+.cell {
+  background: var(--surface);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.k {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.v {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Values that are phrases rather than figures step down a size so they do not
+   shout over the counted ones. */
+.words {
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.q {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 68ch;
+}
+
+@media (max-width: 900px) {
+  .plate {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .plate {
+    grid-template-columns: minmax(0, 1fr);
+    margin-bottom: 64px;
+  }
+  .cell {
+    padding: 18px 16px;
+  }
+  .v {
+    font-size: 28px;
+  }
+  .words {
+    font-size: 17px;
+  }
+}

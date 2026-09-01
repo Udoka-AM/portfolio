@@ -1,6 +1,6 @@
 import TopBar from "@/components/TopBar";
 import Hero from "@/components/Hero";
-import TrialBalance from "@/components/TrialBalance";
+import SpecPlate from "@/components/SpecPlate";
 import WorkList from "@/components/WorkList";
 import DocsList from "@/components/DocsList";
 import WritingList from "@/components/WritingList";
@@ -12,7 +12,7 @@ export default function Home() {
       <TopBar />
       <main>
         <Hero />
-        <TrialBalance />
+        <SpecPlate />
         <WorkList />
         <DocsList />
         <WritingList />

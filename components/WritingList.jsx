@@ -4,26 +4,31 @@ import s from "./WritingList.module.css";
 export default function WritingList() {
   return (
     <section className="section" id="writing">
-      <h2 className="sectionHead">Writing</h2>
-      {WRITING.map((w) => {
-        const body = (
-          <>
-            <span className={s.title}>{w.title}</span>
-            <span className={s.meta}>{w.meta}</span>
-          </>
-        );
+      <h2 className="sectionHead">Recent writing</h2>
 
-        // Unpublished pieces stay plain text rather than shipping a dead link.
-        return w.href ? (
-          <a className={s.entry} key={w.title} href={w.href}>
-            {body}
-          </a>
-        ) : (
-          <div className={s.entry} key={w.title}>
-            {body}
-          </div>
-        );
-      })}
+      <div className={s.grid}>
+        {WRITING.map((w) => {
+          const Tag = w.href ? "a" : "article";
+          return (
+            <Tag
+              key={w.title}
+              className={s.tile}
+              {...(w.href
+                ? { href: w.href, target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+            >
+              <span className={s.topic}>[{w.topic}]</span>
+              <h3 className={s.title}>{w.title}</h3>
+              <p className={s.blurb}>{w.blurb}</p>
+              <div className={s.foot}>
+                <span className={s.words}>{w.words}</span>
+                {/* Unpublished pieces say so rather than offering a dead link. */}
+                <span className={s.action}>{w.href ? "Read" : "Draft"}</span>
+              </div>
+            </Tag>
+          );
+        })}
+      </div>
     </section>
   );
 }

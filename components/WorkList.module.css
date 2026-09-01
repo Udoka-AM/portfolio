@@ -1,49 +1,111 @@
-.entry {
+.grid {
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 28px;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--rule);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 20px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 200ms var(--ease), background 200ms var(--ease);
+}
+
+/* Only tiles that link anywhere should suggest they are clickable. */
+a.tile:hover {
+  border-color: var(--debit);
+  background: var(--raise);
+}
+
+a.tile:hover .name {
+  color: var(--debit);
+}
+
+.featured {
+  border-color: var(--debit);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.kind,
+.badge {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.kind {
+  color: var(--muted);
+}
+
+.badge {
+  color: var(--debit);
 }
 
 .name {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
-  font-size: 21px;
-  letter-spacing: -0.015em;
+  font-size: 22px;
+  letter-spacing: -0.02em;
   transition: color 200ms var(--ease);
 }
 
-.entry:hover .name {
-  color: var(--debit);
-}
-
-.kind {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 6px;
-}
-
 .line {
-  font-size: var(--step-body);
+  font-size: 14.5px;
   line-height: 1.55;
-  margin-bottom: 10px;
 }
 
 .hard {
-  font-size: 14px;
+  font-size: 13.5px;
   line-height: 1.55;
   color: var(--muted);
   border-left: 2px solid var(--flag);
-  padding-left: 14px;
+  padding-left: 13px;
 }
 
-@media (max-width: 620px) {
-  .entry {
-    grid-template-columns: 1fr;
-    gap: 12px;
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  /* Pin the stack to the bottom so tiles of unequal height still line up. */
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.tags li {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.tags li::before {
+  content: "> ";
+  color: var(--rule);
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tile {
+    padding: 18px 16px;
+  }
+  .name {
+    font-size: 20px;
   }
 }
