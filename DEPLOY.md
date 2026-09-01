@@ -19,7 +19,65 @@ blocked, and it is account-wide — two different project names returned the sam
 error. This has to be resolved from the Vercel dashboard before anything below
 can happen.
 
-## Once the account is unblocked
+
+## Cloudflare Pages (free) — the current plan
+
+Vercel is blocked (above), so this is the route. The site is a static export,
+so nothing in the code changes.
+
+**Step 1 — needs you, requires a Cloudflare login.**
+At dash.cloudflare.com → Workers & Pages → Create → Pages → Connect to Git,
+pick `Udoka-AM/portfolio`. Build settings:
+
+| Setting | Value |
+|---|---|
+| Framework preset | Next.js (Static HTML Export) |
+| Build command | `npm run build` |
+| Output directory | `out` |
+
+That build needs `output: "export"` in `next.config.mjs`. It is **not** committed
+— the repo currently builds for a Node host. Add it when Cloudflare is confirmed
+as the target:
+
+```js
+const nextConfig = { reactStrictMode: true, output: "export" };
+```
+
+Verified locally: the export builds clean at ~1.1MB, fonts self-hosted, no
+external requests.
+
+**Step 2 — the apex domain wrinkle.**
+`udokaam.dev` is an apex domain, and apex records cannot be CNAMEs. Cloudflare
+Pages resolves this with CNAME flattening, which requires the zone to be on
+Cloudflare nameservers. So pointing the apex at Pages means **moving DNS from
+Hostinger to Cloudflare** — Hostinger stays the registrar, Cloudflare becomes
+the DNS host.
+
+That is a bigger change than swapping two records, which is why it has not been
+done. The alternative is serving from `www.udokaam.dev` and redirecting the
+apex, which keeps DNS at Hostinger but makes `www` the canonical URL.
+
+Cloudflare prints the exact nameservers when the zone is added. Applying them at
+Hostinger is one API call from here.
+
+**Step 3 — DNS.** Once the Pages project exists and Cloudflare has shown its
+nameservers or CNAME target, the cutover from the current records is a single
+step. Existing zone, for reference:
+
+| Type | Name | Value | What it is |
+|---|---|---|---|
+| A | `@` | `2.57.91.91` | Hostinger parking |
+| CNAME | `www` | `udokaam.dev.` | www to apex |
+
+No MX records, so no email is affected.
+
+## Domain renewal
+
+The `.DEV` subscription is `non_renewing` with auto-renew **off**. It expires
+**2027-09-01** and will not be charged. Turn auto-renew on to keep the domain.
+
+## If Vercel unblocks instead
+
 
 1. **Create the project.** Import `Udoka-AM/portfolio` at
    vercel.com/new. Framework auto-detects as Next.js; no build settings needed.
