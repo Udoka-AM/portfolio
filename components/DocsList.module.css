@@ -1,33 +1,67 @@
-.entry {
+.grid {
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 28px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--rule);
-  align-items: baseline;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 20px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 200ms var(--ease), background 200ms var(--ease);
+}
+
+.tile:hover {
+  border-color: var(--debit);
+  background: var(--raise);
+}
+
+.tile:hover .name {
+  color: var(--debit);
+}
+
+.where {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .name {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
-  font-size: 17px;
-  letter-spacing: -0.01em;
+  font-size: 18px;
+  letter-spacing: -0.015em;
   transition: color 200ms var(--ease);
 }
 
-.entry:hover .name {
-  color: var(--debit);
-}
-
 .line {
-  font-size: 14.5px;
+  font-size: 13.5px;
   line-height: 1.55;
   color: var(--muted);
 }
 
+.action {
+  margin-top: auto;
+  padding-top: 12px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--debit);
+}
+
+.action::after { content: " →"; }
+
 @media (max-width: 620px) {
-  .entry {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
+  .grid { grid-template-columns: minmax(0, 1fr); }
 }

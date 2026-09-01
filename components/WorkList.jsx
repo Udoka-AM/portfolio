@@ -12,7 +12,7 @@ export default function WorkList() {
           return (
             <Tag
               key={p.name}
-              className={`${s.tile} ${p.featured ? s.featured : ""}`}
+              className={`tile-interactive ${s.tile} ${p.featured ? s.featured : ""}`}
               {...(p.href
                 ? { href: p.href, target: "_blank", rel: "noopener noreferrer" }
                 : {})}

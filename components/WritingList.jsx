@@ -12,7 +12,7 @@ export default function WritingList() {
           return (
             <Tag
               key={w.title}
-              className={s.tile}
+              className={`tile-interactive ${s.tile}`}
               {...(w.href
                 ? { href: w.href, target: "_blank", rel: "noopener noreferrer" }
                 : {})}

@@ -21,9 +21,9 @@ export const FACTS = [
     note: "Solana · EVM · Node",
   },
   {
-    key: "Documentation sites",
-    value: "3",
-    note: "Published and maintained alongside the systems they describe",
+    key: "Documentation",
+    value: "4",
+    note: "Three product doc sites, plus an open Solana resource collection",
   },
   {
     key: "Ecosystems served",
@@ -38,10 +38,7 @@ export const FACTS = [
   {
     key: "Developers reached",
     value: "5,000+",
-    wide: true,
-    note:
-      "Across conference talks, workshops, livestreams, YouTube, GitHub, documentation, and posts. " +
-      "Different channels on different denominators — the surface area is the claim, not a single settled total.",
+    note: "Talks, workshops, livestreams, YouTube, GitHub, docs, and posts",
   },
   {
     key: "Frameworks",

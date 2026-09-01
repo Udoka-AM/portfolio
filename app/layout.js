@@ -1,6 +1,7 @@
 import { Bricolage_Grotesque, Public_Sans, Geist_Mono } from "next/font/google";
 import { SITE } from "@/content/site";
 import { NO_FLASH_SCRIPT } from "@/lib/theme";
+import StructuredData from "@/components/StructuredData";
 import "./globals.css";
 
 // next/font self-hosts these at build time: no render-blocking request to
@@ -28,6 +29,8 @@ const mono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://udokaam.dev"),
+  alternates: { canonical: "/" },
   title: `${SITE.name} — ${SITE.role}`,
   description: SITE.intro,
   openGraph: {
@@ -47,6 +50,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Sets data-theme before first paint so the palette never flashes. */}
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_SCRIPT }} />
+        <StructuredData />
       </head>
       <body>{children}</body>
     </html>

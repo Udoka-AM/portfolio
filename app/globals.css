@@ -16,6 +16,7 @@
   --credit: #1b5e45;
   --flag: #a3341f;
   --raise: rgba(18, 21, 26, 0.03);
+  --shadow: rgba(18, 21, 26, 0.16);
 
   --measure: 940px;
   --gutter: 28px;
@@ -39,6 +40,7 @@
     --credit: #5fbf93;
     --flag: #e0724f;
     --raise: rgba(232, 234, 230, 0.04);
+    --shadow: rgba(0, 0, 0, 0.55);
   }
 }
 
@@ -51,6 +53,7 @@
   --credit: #5fbf93;
   --flag: #e0724f;
   --raise: rgba(232, 234, 230, 0.04);
+  --shadow: rgba(0, 0, 0, 0.55);
 }
 
 /* --- reset ---------------------------------------------------------------- */
@@ -158,4 +161,58 @@ a {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+
+/* --- interactive tile ------------------------------------------------------
+   Shared by the project, docs, and writing tiles. A hairline beam wipes across
+   the top edge on hover and the tile lifts slightly — geometric rather than
+   glowing, which is the only thing that sits right next to 1px rules.
+   Applied alongside each module's own .tile class. */
+
+.tile-interactive {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 200ms var(--ease), background 200ms var(--ease),
+    transform 200ms var(--ease), box-shadow 200ms var(--ease);
+}
+
+.tile-interactive::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--debit), transparent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 460ms var(--ease);
+  pointer-events: none;
+}
+
+a.tile-interactive:hover,
+a.tile-interactive:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px -14px var(--shadow);
+}
+
+a.tile-interactive:hover::after,
+a.tile-interactive:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* A tile with nowhere to go should not pretend otherwise. */
+article.tile-interactive::after {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-interactive::after {
+    transition: none;
+  }
+  a.tile-interactive:hover,
+  a.tile-interactive:focus-visible {
+    transform: none;
+  }
 }
