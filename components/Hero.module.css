@@ -1,0 +1,31 @@
+.hero {
+  padding: 84px 0 68px;
+}
+
+.title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: var(--step-display);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 26px;
+}
+
+.lead {
+  font-size: var(--step-lead);
+  line-height: 1.55;
+  max-width: 30em;
+  margin-bottom: 14px;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 34em;
+}
+
+@media (max-width: 620px) {
+  .hero {
+    padding: 56px 0 48px;
+  }
+}

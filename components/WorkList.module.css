@@ -1,0 +1,49 @@
+.entry {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 28px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.name {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.015em;
+  transition: color 200ms var(--ease);
+}
+
+.entry:hover .name {
+  color: var(--debit);
+}
+
+.kind {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.line {
+  font-size: var(--step-body);
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+
+.hard {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+  border-left: 2px solid var(--flag);
+  padding-left: 14px;
+}
+
+@media (max-width: 620px) {
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
