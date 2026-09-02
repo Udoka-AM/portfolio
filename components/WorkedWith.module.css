@@ -52,11 +52,13 @@
   white-space: nowrap;
 }
 
+/* Fallback for the three marks that could not be sourced. Sized to sit level
+   with the logos rather than dominate them. */
 .name {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
-  font-size: 21px;
-  letter-spacing: -0.02em;
+  font-size: 17px;
+  letter-spacing: -0.015em;
   color: var(--muted);
   transition: color 200ms var(--ease);
 }
@@ -65,15 +67,28 @@
   color: var(--ink);
 }
 
+/* Full colour: these are here to be recognised, and desaturating them defeats
+   the point. Held slightly back at rest so the row does not shout over the
+   page, then full strength on hover. */
 .logo {
-  height: 26px;
+  height: 42px;
   width: auto;
-  opacity: 0.75;
-  transition: opacity 200ms var(--ease);
+  max-width: 150px;
+  object-fit: contain;
+  border-radius: 3px;
+  opacity: 0.92;
+  transition: opacity 200ms var(--ease), transform 200ms var(--ease);
 }
 
 .item:hover .logo {
   opacity: 1;
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    transition: none;
+  }
 }
 
 .qual {
@@ -87,7 +102,7 @@
 
 @media (max-width: 620px) {
   .name {
-    font-size: 18px;
+    font-size: 15px;
   }
   .track {
     gap: 36px;
