@@ -57,7 +57,7 @@
   .nav {
     gap: 16px;
   }
-  .nav a:not(.keep) {
-    display: none;
+  .nav a {
+    font-size: 13px;
   }
 }

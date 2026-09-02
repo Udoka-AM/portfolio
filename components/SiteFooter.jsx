@@ -3,7 +3,7 @@ import s from "./SiteFooter.module.css";
 
 export default function SiteFooter() {
   return (
-    <footer className={s.foot} id="cv">
+    <footer className={s.foot}>
       {LINKS.map((l) => (
         <a
           key={l.href}

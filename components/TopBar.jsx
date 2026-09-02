@@ -12,7 +12,7 @@ export default function TopBar() {
       <span className={s.mark}>{SITE.name}</span>
       <nav className={s.nav}>
         {NAV.map((n) => (
-          <a key={n.href} href={n.href} className={n.keep ? s.keep : undefined}>
+          <a key={n.href} href={n.href}>
             {n.label}
           </a>
         ))}

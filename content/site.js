@@ -19,10 +19,8 @@ export const LINKS = [
   { label: "udoka.am@gmail.com", href: "mailto:udoka.am@gmail.com" },
 ];
 
-// `keep` marks the one link that survives the mobile breakpoint.
 export const NAV = [
   { label: "Projects", href: "#projects" },
   { label: "Docs", href: "#docs" },
   { label: "Writing", href: "#writing" },
-  { label: "CV", href: "#cv", keep: true },
 ];
