@@ -4,7 +4,7 @@ export const SITE = {
   name: "Udoka A.M.",
   role: "Software engineer",
   intro:
-    "Software engineer building around blockchain, AI and cloud technologies and making it usable by the developers who adopt it.",
+    "Software engineer building around blockchain, AI and cloud technologies while making it usable by the developers who adopt it.",
   focus:
     "Currently interested in agentic finance, cross-border stablecoin rails, onchain markets, and data security infrastructure.",
   // Used for <title>, og:title, and the JSON-LD person block.
@@ -21,7 +21,7 @@ export const LINKS = [
 
 // `keep` marks the one link that survives the mobile breakpoint.
 export const NAV = [
-  { label: "Work", href: "#work" },
+  { label: "Projects", href: "#projects" },
   { label: "Docs", href: "#docs" },
   { label: "Writing", href: "#writing" },
   { label: "CV", href: "#cv", keep: true },

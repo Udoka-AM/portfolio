@@ -1,0 +1,110 @@
+.viewport {
+  display: flex;
+  overflow: hidden;
+  margin-top: 24px;
+  padding: 4px 0;
+  /* Fade both edges so marks enter and leave rather than being cut off. */
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 52px;
+  flex: 0 0 auto;
+  list-style: none;
+  margin: 0;
+  padding: 0 52px 0 0;
+  animation: marquee 42s linear infinite;
+}
+
+.viewport:hover .track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Both tracks are identical, so one track-width of travel loops exactly. */
+    transform: translateX(-100%);
+  }
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.name {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+  transition: color 200ms var(--ease);
+}
+
+.item:hover .name {
+  color: var(--ink);
+}
+
+.logo {
+  height: 26px;
+  width: auto;
+  opacity: 0.75;
+  transition: opacity 200ms var(--ease);
+}
+
+.item:hover .logo {
+  opacity: 1;
+}
+
+.qual {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.75;
+}
+
+@media (max-width: 620px) {
+  .name {
+    font-size: 18px;
+  }
+  .track {
+    gap: 36px;
+    padding-right: 36px;
+  }
+}
+
+/* Motion off: the row becomes a normal horizontal scroll region, so every
+   name is still reachable. */
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    overflow-x: auto;
+  }
+  .track {
+    animation: none;
+  }
+  .track[aria-hidden="true"] {
+    display: none;
+  }
+}

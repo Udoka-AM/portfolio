@@ -1,0 +1,42 @@
+import { WORKED_WITH } from "@/content/worked-with";
+import s from "./WorkedWith.module.css";
+
+function Mark({ item }) {
+  return (
+    <li className={s.item}>
+      {item.logo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img className={s.logo} src={item.logo} alt={item.name} loading="lazy" />
+      ) : (
+        <span className={s.name}>{item.name}</span>
+      )}
+      {item.via ? <span className={s.qual}>via {item.via}</span> : null}
+      {item.formerly ? <span className={s.qual}>formerly {item.formerly}</span> : null}
+    </li>
+  );
+}
+
+export default function WorkedWith() {
+  return (
+    <section className="section" id="worked-with">
+      <h2 className="sectionHead">Worked with</h2>
+
+      <div className={s.viewport}>
+        {/* The list is rendered twice so the track can translate by exactly half
+            its width and land back where it started — a seamless loop with no
+            jump. The copy is hidden from assistive tech and from the page's
+            reading order. */}
+        <ul className={s.track}>
+          {WORKED_WITH.map((w) => (
+            <Mark key={w.name} item={w} />
+          ))}
+        </ul>
+        <ul className={s.track} aria-hidden="true">
+          {WORKED_WITH.map((w) => (
+            <Mark key={`${w.name}-echo`} item={w} />
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}

@@ -12,7 +12,7 @@ export const DOCS = [
     name: "Solana Developer Resources",
     where: "GitHub",
     cta: "View repo",
-    href: "https://github.com/Udoka-AM/Solana-developer-resources",
+    href: "https://github.com/Udoka-AM/Solana-developer-resources/tree/main/README.md",
     line:
       "Reading, tooling, and reference material for getting started on Solana, kept in order rather than scattered.",
   },

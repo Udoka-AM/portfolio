@@ -3,7 +3,7 @@ import s from "./WorkList.module.css";
 
 export default function WorkList() {
   return (
-    <section className="section" id="work">
+    <section className="section" id="projects">
       <h2 className="sectionHead">Featured projects</h2>
 
       <div className={s.grid}>

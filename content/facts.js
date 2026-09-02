@@ -27,8 +27,8 @@ export const FACTS = [
   },
   {
     key: "Ecosystems served",
-    value: "7",
-    note: "Solana · Arweave · WeaveDB · MagicBlock · Codecademy · Ingressive · University of Benin, Nigeria",
+    value: "9",
+    note: "Solana · Arweave · WeaveDB · MagicBlock · QuickNode · Polytope Labs · Codecademy · Ingressive · University of Benin, Nigeria",
   },
   {
     key: "Documentation",
