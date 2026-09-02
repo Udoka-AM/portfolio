@@ -67,59 +67,10 @@
   color: var(--ink);
 }
 
-/* Every mark sits in an identical box, so a wide lockup and a square avatar
-   carry the same visual weight and the row stays on one baseline. */
-.plate {
-  display: block;
-  overflow: hidden;
-  width: 152px;
-  height: 48px;
-  padding: 6px 12px;
-  border-radius: 3px;
-  /* Constant in both themes. Half these lockups are dark artwork and half are
-     light-on-dark, so a plate that followed the theme would make one group or
-     the other disappear. */
-  background: #f7f7f5;
-  transition: box-shadow 200ms var(--ease), transform 200ms var(--ease);
-}
 
-.item:hover .plate {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px -12px var(--shadow);
-}
+.item:hover 
 
-.logo {
-  /* Explicit width and height, not max-*: the plate's grid row auto-sizes to
-     its content, so a percentage max-height resolves against the image's own
-     height and never clamps it. Square marks overflowed to 128px that way. */
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: grayscale(1);
-  opacity: 0.72;
-  transition: filter 220ms var(--ease), opacity 220ms var(--ease);
-}
 
-.item:hover .logo {
-  filter: none;
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .logo,
-  .plate {
-    transition: none;
-  }
-  .item:hover .plate {
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .logo {
-    transition: none;
-  }
-}
 
 .qual {
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -151,5 +102,36 @@
   }
   .track[aria-hidden="true"] {
     display: none;
+  }
+}
+
+/* No plate and no filter: the marks sit straight on the page in full colour.
+   Several carry their own dark ground, which is how those brands supply them. */
+.logo {
+  height: 44px;
+  width: auto;
+  max-width: 168px;
+  object-fit: contain;
+  border-radius: 3px;
+  transition: transform 200ms var(--ease), opacity 200ms var(--ease);
+}
+
+.item:hover .logo {
+  transform: translateY(-2px) scale(1.03);
+}
+
+@media (max-width: 620px) {
+  .logo {
+    height: 36px;
+    max-width: 132px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    transition: none;
+  }
+  .item:hover .logo {
+    transform: none;
   }
 }

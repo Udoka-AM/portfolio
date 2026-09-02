@@ -33,6 +33,15 @@ export const metadata = {
   alternates: { canonical: "/" },
   title: `${SITE.name} — ${SITE.role}`,
   description: SITE.intro,
+  icons: {
+    icon: [
+      // SVG first: it is the only one that adapts to a dark tab bar.
+      { url: "/udoka-mark.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon-180.png", sizes: "180x180" }],
+  },
   openGraph: {
     title: `${SITE.name} — ${SITE.role}`,
     description: SITE.tagline,

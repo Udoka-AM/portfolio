@@ -5,10 +5,8 @@ function Mark({ item }) {
   return (
     <li className={s.item} title={item.name}>
       {item.logo ? (
-        <span className={s.plate}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={s.logo} src={item.logo} alt={item.name} loading="lazy" />
-        </span>
+        // eslint-disable-next-line @next/next/no-img-element
+        <img className={s.logo} src={item.logo} alt={item.name} loading="lazy" />
       ) : (
         <span className={s.name}>{item.name}</span>
       )}
