@@ -23,6 +23,7 @@ export const WORKED_WITH = [
   { name: "Blockchain Uniben", logo: "/logos/blockchain-uniben.png" },
   { name: "University of Benin", logo: "/logos/university-of-benin.png" },
   { name: "Seedless Labs", logo: "/logos/seedless-labs.png" },
+  { name: "Lonview Labs", logo: "/logos/lonview-labs.png" },
   { name: "bchainAfrica", logo: "/logos/bchainafrica.png" },
   { name: "NFTNG", logo: "/logos/nftng.png" },
   { name: "Yativo", formerly: "Zinari Finance", logo: "/logos/yativo.png" },

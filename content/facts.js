@@ -17,8 +17,8 @@ export const FACTS = [
   },
   {
     key: "Running since",
-    value: "2022",
-    note: "Hours are an input, not an outcome",
+    value: "2021",
+    note: "It's been a little while around here",
   },
   {
     key: "Events",
@@ -27,8 +27,8 @@ export const FACTS = [
   },
   {
     key: "Ecosystems served",
-    value: "9",
-    note: "Solana · Arweave · WeaveDB · MagicBlock · QuickNode · Polytope Labs · Codecademy · Ingressive · University of Benin, Nigeria",
+    value: "8",
+    note: "Solana · Arweave · WeaveDB · MagicBlock · QuickNode · Codecademy · Ingressive · University of Benin, Nigeria",
   },
   {
     key: "Documentation",
@@ -36,9 +36,9 @@ export const FACTS = [
     note: "Three product doc sites, plus an open Solana resource collection",
   },
   {
-    key: "Runtimes targeted",
-    value: "3",
-    note: "Solana · EVM · Node",
+    key: "Blockchains built on",
+    value: "6+",
+    note: "Solana · Polygon · Ethereum · BSC · Polkadot · Arweave",
   },
   {
     key: "Frameworks",

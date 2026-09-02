@@ -14,8 +14,8 @@ export default function Home() {
       <main>
         <Hero />
         <SpecPlate />
-        <WorkedWith />
         <WorkList />
+        <WorkedWith />
         <DocsList />
         <WritingList />
       </main>
