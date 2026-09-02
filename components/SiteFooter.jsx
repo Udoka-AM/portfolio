@@ -1,4 +1,4 @@
-import { LINKS } from "@/content/site";
+import { LINKS, SITE } from "@/content/site";
 import s from "./SiteFooter.module.css";
 
 export default function SiteFooter() {
@@ -15,6 +15,10 @@ export default function SiteFooter() {
           {l.label}
         </a>
       ))}
+
+      {/* The full legal name, stated once. Rare enough to be a unique search
+          term, and body text is indexed where structured data alone is not. */}
+      <p className={s.legal}>{SITE.legalName}</p>
     </footer>
   );
 }

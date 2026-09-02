@@ -19,3 +19,13 @@
 .foot a:hover {
   color: var(--debit);
 }
+
+.legal {
+  flex-basis: 100%;
+  margin: 6px 0 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  opacity: 0.7;
+}

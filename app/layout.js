@@ -46,6 +46,16 @@ export const metadata = {
     title: `${SITE.name} — ${SITE.role}`,
     description: SITE.tagline,
     type: "profile",
+    url: "https://udokaam.dev/",
+    siteName: SITE.name,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${SITE.name} — ${SITE.role}` }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} — ${SITE.role}`,
+    description: SITE.tagline,
+    creator: "@Udoka_AM",
+    images: ["/og.png"],
   },
 };
 

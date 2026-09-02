@@ -1,6 +1,6 @@
 import { PROJECTS } from "@/content/projects";
 import { DOCS } from "@/content/docs";
-import { SITE, LINKS } from "@/content/site";
+import { SITE, PROFILES } from "@/content/site";
 
 const ORIGIN = "https://udokaam.dev";
 
@@ -17,12 +17,13 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${ORIGIN}/#person`,
-    name: SITE.name,
+    name: SITE.legalName,
+    alternateName: [SITE.name, ...SITE.alternateNames],
     description: SITE.intro,
     url: ORIGIN,
     email: "udoka.am@gmail.com",
     jobTitle: SITE.role,
-    sameAs: LINKS.filter((l) => l.href.startsWith("http")).map((l) => l.href),
+    sameAs: PROFILES,
     knowsAbout: [
       "Backend engineering",
       "Blockchain infrastructure",
