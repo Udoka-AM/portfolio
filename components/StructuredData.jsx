@@ -1,5 +1,6 @@
 import { PROJECTS } from "@/content/projects";
 import { DOCS } from "@/content/docs";
+import { getAllPosts } from "@/lib/posts";
 import { SITE, PROFILES } from "@/content/site";
 
 const ORIGIN = "https://udokaam.dev";
@@ -13,6 +14,8 @@ const ORIGIN = "https://udokaam.dev";
  * crawler arriving here has a machine-readable route to all of it.
  */
 export default function StructuredData() {
+  const posts = getAllPosts();
+
   const data = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -33,13 +36,23 @@ export default function StructuredData() {
       "Technical documentation",
     ],
     mainEntityOfPage: { "@type": "WebPage", "@id": `${ORIGIN}/` },
-    subjectOf: DOCS.map((d) => ({
+    subjectOf: [
+      ...posts.map((p) => ({
+        "@type": "TechArticle",
+        name: p.title,
+        abstract: p.blurb,
+        url: `${ORIGIN}/writing/${p.slug}/`,
+        ...(p.date ? { datePublished: p.date } : {}),
+        author: { "@id": `${ORIGIN}/#person` },
+      })),
+      ...DOCS.map((d) => ({
       "@type": "TechArticle",
       name: `${d.name} documentation`,
       abstract: d.line,
       url: d.href,
       author: { "@id": `${ORIGIN}/#person` },
-    })),
+      })),
+    ],
     // Only projects with a public destination are worth asserting.
     workExample: PROJECTS.filter((p) => p.href).map((p) => ({
       "@type": "SoftwareSourceCode",

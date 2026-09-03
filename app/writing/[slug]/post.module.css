@@ -1,0 +1,163 @@
+.post {
+  /* Prose wants a narrower column than the 1320px site measure. */
+  max-width: 68ch;
+  padding: 40px 0 96px;
+}
+
+.back {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 180ms var(--ease);
+}
+
+.back:hover {
+  color: var(--debit);
+}
+
+.head {
+  padding: 34px 0 30px;
+  margin-bottom: 34px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.topic {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 44px);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  margin: 12px 0 16px;
+}
+
+.blurb {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+
+.meta {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+.dot {
+  margin: 0 10px;
+  opacity: 0.5;
+}
+
+/* --- rendered markdown --------------------------------------------------- */
+
+.body {
+  font-size: 16.5px;
+  line-height: 1.68;
+}
+
+.body :global(h2) {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 23px;
+  letter-spacing: -0.02em;
+  margin: 46px 0 14px;
+  text-wrap: balance;
+}
+
+.body :global(h3) {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 32px 0 10px;
+}
+
+.body :global(p) {
+  margin: 0 0 20px;
+}
+
+.body :global(a) {
+  color: var(--debit);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.body :global(a:hover) {
+  border-bottom-color: var(--debit);
+}
+
+.body :global(ul),
+.body :global(ol) {
+  margin: 0 0 20px;
+  padding-left: 22px;
+}
+
+.body :global(li) {
+  margin-bottom: 8px;
+}
+
+/* Scaffold notes and pull quotes share the flagged rule used on project tiles. */
+.body :global(blockquote) {
+  margin: 0 0 24px;
+  padding: 2px 0 2px 16px;
+  border-left: 2px solid var(--flag);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.body :global(blockquote p:last-child) {
+  margin-bottom: 0;
+}
+
+.body :global(code) {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.88em;
+  background: var(--raise);
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+.body :global(pre) {
+  overflow-x: auto;
+  background: var(--raise);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 16px;
+  margin: 0 0 24px;
+}
+
+.body :global(pre code) {
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.body :global(hr) {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 40px 0;
+}
+
+@media (max-width: 620px) {
+  .post {
+    padding: 28px 0 64px;
+  }
+  .body {
+    font-size: 16px;
+  }
+}
