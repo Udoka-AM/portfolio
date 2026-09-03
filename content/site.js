@@ -41,6 +41,10 @@ export const PROFILES = [
   "https://web.facebook.com/udoka.am/",
   "https://www.instagram.com/udoka_am/",
   "https://www.threads.com/@udoka.am",
+  "https://medium.com/@Udoka_AM",
+  "https://substack.com/@udokaam",
+  "https://dev.to/udoka_am",
+  "https://hashnode.com/@Uddy",
 ];
 
 export const NAV = [
