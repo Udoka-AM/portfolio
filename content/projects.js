@@ -18,7 +18,7 @@ export const PROJECTS = [
     name: "Arc",
     kind: "simulation · docs",
     featured: true,
-    href: "https://arc-doc.mintlify.site/",
+    href: "https://arc.udokaam.dev/",
     line:
       "Cross-border stablecoin and fiat infrastructure for the EU↔Africa corridor — the backend of a payments business that moves money between Europe and Africa in seconds. Multichain rails, a double-entry ledger, and settlement modelled as a finite state machine so every transfer has one legal next step.",
     hard:
@@ -29,7 +29,7 @@ export const PROJECTS = [
     name: "Agents Circle",
     kind: "two runtimes",
     featured: true,
-    href: "https://agentscircle.vercel.app",
+    href: "https://agentscircle.udokaam.dev/",
     line:
       "A marketplace for autonomous trading agents in prediction markets. Developers list self-built, self-hosted agents; traders allocate capital those agents trade on their behalf. Custody-preserving vaults built twice against one specification — Anchor on Solana, Solidity on Polygon.",
     hard:

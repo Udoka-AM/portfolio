@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------
    Documentation.
 
-   The product docs are Mintlify deployments and stay there — this section is
-   the crawlable index that points at them. `where` names the host so a reader
-   knows they are leaving, and the outbound links carry no `nofollow`, so the
-   relationship is visible to a crawler.
+   The product docs are Mintlify deployments served from this domain — each on
+   its own subdomain, so the keywords in them accrue here rather than to
+   mintlify.app. `where` names the host, and the outbound links carry no
+   `nofollow`, so the relationship stays visible to a crawler.
 --------------------------------------------------------------------------- */
 
 export const DOCS = [
@@ -18,25 +18,25 @@ export const DOCS = [
   },
   {
     name: "Arc",
-    where: "Mintlify",
+    where: "arc.udokaam.dev",
     cta: "Read docs",
-    href: "https://arc-doc.mintlify.site/",
+    href: "https://arc.udokaam.dev/",
     line:
       "Ledger invariants, the settlement state machine, and the chaos suite that proves them.",
   },
   {
     name: "Agents Circle",
-    where: "Mintlify",
+    where: "agentscircle.udokaam.dev",
     cta: "Read docs",
-    href: "https://agent-circle.mintlify.app/",
+    href: "https://agentscircle.udokaam.dev/",
     line:
       "One specification, two runtimes: PDA custody on Solana against a singleton on EVM.",
   },
   {
     name: "RetinaOS",
-    where: "Mintlify",
+    where: "retinaos.udokaam.dev",
     cta: "Read docs",
-    href: "https://retinaos.mintlify.app/",
+    href: "https://retinaos.udokaam.dev/",
     line:
       "Public API surface, refresh ceilings, and the wallet reputation model, stated up front.",
   },
