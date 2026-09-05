@@ -29,7 +29,7 @@ export const PROJECTS = [
     name: "Agents Circle",
     kind: "two runtimes",
     featured: true,
-    href: "https://agentscircle.udokaam.dev/",
+    href: "https://agentscircle.network",
     line:
       "A marketplace for autonomous trading agents in prediction markets. Developers list self-built, self-hosted agents; traders allocate capital those agents trade on their behalf. Custody-preserving vaults built twice against one specification — Anchor on Solana, Solidity on Polygon.",
     hard:
