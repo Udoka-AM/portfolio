@@ -27,13 +27,13 @@ export const FACTS = [
   },
   {
     key: "Ecosystems served",
-    value: "8",
-    note: "Solana · Arweave · WeaveDB · MagicBlock · QuickNode · Codecademy · Ingressive · University of Benin, Nigeria",
+    value: "9",
+    note: "Solana · Arweave · WeaveDB · MagicBlock · Wormhole · QuickNode · Codecademy · Ingressive · University of Benin, Nigeria",
   },
   {
     key: "Documentation",
-    value: "4",
-    note: "Three product doc sites, plus an open Solana resource collection",
+    value: "5",
+    note: "Four product doc sites, plus an open Solana resource collection",
   },
   {
     key: "Blockchains built on",

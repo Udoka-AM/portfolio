@@ -16,6 +16,7 @@ export const WORKED_WITH = [
   { name: "Solana Foundation", via: "SuperteamNG", logo: "/logos/superteam-ng.png" },
   { name: "Arweave", logo: "/logos/arweave.png" },
   { name: "MagicBlock", logo: "/logos/magicblock.png" },
+  { name: "Wormhole", logo: "/logos/wormhole.png" },
   { name: "Polytope Labs", logo: "/logos/polytope-labs.png" },
   { name: "Codecademy", logo: "/logos/codecademy.png" },
   { name: "web3bridge", logo: "/logos/web3bridge.png" },

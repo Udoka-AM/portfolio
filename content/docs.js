@@ -40,4 +40,12 @@ export const DOCS = [
     line:
       "Public API surface, refresh ceilings, and the wallet reputation model, stated up front.",
   },
+  {
+    name: "Nelo",
+    where: "nelo.mintlify.app",
+    cta: "Read docs",
+    href: "https://nelo.mintlify.app/",
+    line:
+      "A card-free payment taken on the Android phone a shopkeeper already owns — settled in USDC on Solana, shown to them in their own currency, and paid into their own bank by a licensed partner.",
+  },
 ];
