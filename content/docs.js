@@ -42,9 +42,9 @@ export const DOCS = [
   },
   {
     name: "Nelo",
-    where: "nelo.mintlify.app",
+    where: "nelo.udokaam.dev",
     cta: "Read docs",
-    href: "https://nelo.mintlify.app/",
+    href: "https://nelo.udokaam.dev/",
     line:
       "A card-free payment taken on the Android phone a shopkeeper already owns — settled in USDC on Solana, shown to them in their own currency, and paid into their own bank by a licensed partner.",
   },
