@@ -15,9 +15,41 @@
 
 export const PROJECTS = [
   {
+    name: "Corridor",
+    kind: "settlement · live demo",
+    featured: true,
+    href: "https://udoka-am.github.io/corridor/#economics",
+    line:
+      "Stablecoin settlement and treasury rails for licensed payment companies moving money into and out of Africa. Collect EUR or USD abroad and pay out NGN or KES without pre-funding foreign bank accounts — Tempo as the settlement hub, Solana for on and off-ramp liquidity, and an optional Zcash shielded lane for supplier payments, all reconciled against one double-entry ledger.",
+    hard:
+      "A live testnet hop burned the USDC and Circle's attestation completed, but the final mint is restricted to Across's own relayer, which never ran it. Every leg is compensated independently now, and funds sit in a Corridor address between hops rather than in flight.",
+    tags: ["TypeScript", "Tempo", "Solana", "Zcash FROST"],
+  },
+  {
+    name: "Tempo × Solana Swap",
+    kind: "live",
+    featured: true,
+    href: "https://tempo-solana-swap.pages.dev/",
+    line:
+      "Non-custodial stablecoin swaps between Tempo and Solana mainnet. The browser never holds a bridge credential — same-origin Pages Functions validate each leg, inject the integrator ID server-side, and hand back short-lived quotes.",
+    hard:
+      "Across has no direct Tempo↔Solana route, so every swap is composed as two independent legs through Base. Pairs it cannot actually fill are rejected rather than quoted synthetically — a real price or none.",
+    tags: ["TypeScript", "Across", "Tempo", "Cloudflare Pages"],
+  },
+  {
+    name: "Nelo",
+    kind: "in progress · solana mobile",
+    featured: true,
+    href: "https://udoka-am.github.io/nelo/",
+    line:
+      "Accept payments on the Android phone a shopkeeper already owns. The money settles in USDC on Solana, the merchant sees their own currency, and a licensed partner pays it into their own bank — and the sale still completes when neither phone has a network.",
+    hard:
+      "@noble/curves does not default to low-S on P-256, and a high-S signature does not settle on chain. Two facts that cost a day if you meet them late, now pinned by tests on every signing path.",
+    tags: ["Rust", "Anchor", "StrongBox", "secp256r1"],
+  },
+  {
     name: "Arc",
     kind: "simulation · docs",
-    featured: true,
     href: "https://arc.udokaam.dev/",
     line:
       "Cross-border stablecoin and fiat infrastructure for the EU↔Africa corridor — the backend of a payments business that moves money between Europe and Africa in seconds. Multichain rails, a double-entry ledger, and settlement modelled as a finite state machine so every transfer has one legal next step.",
@@ -28,8 +60,7 @@ export const PROJECTS = [
   {
     name: "Agents Circle",
     kind: "two runtimes",
-    featured: true,
-    href: "https://agentscircle.network",
+        href: "https://agentscircle.network",
     line:
       "A marketplace for autonomous trading agents in prediction markets. Developers list self-built, self-hosted agents; traders allocate capital those agents trade on their behalf. Custody-preserving vaults built twice against one specification — Anchor on Solana, Solidity on Polygon.",
     hard:
@@ -39,8 +70,7 @@ export const PROJECTS = [
   {
     name: "RetinaOS",
     kind: "live",
-    featured: true,
-    href: "https://retinaos.xyz",
+        href: "https://retinaos.xyz",
     line:
       "The intelligence layer for Robinhood Chain: real-time token discovery, wallet reputation scoring, and a market analyst grounded in live on-chain data. Launched onto a chain barely a month old that was already among the highest by DEX volume — hundreds of tokens, no tooling built for the terrain.",
     hard:

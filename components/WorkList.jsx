@@ -1,12 +1,21 @@
+"use client";
+
+import { useId, useState } from "react";
 import { PROJECTS } from "@/content/projects";
 import s from "./WorkList.module.css";
 
 export default function WorkList() {
+  const [expanded, setExpanded] = useState(false);
+  const gridId = useId();
+
   return (
     <section className="section" id="projects">
       <h2 className="sectionHead">Featured projects</h2>
 
-      <div className={s.grid}>
+      {/* Every tile is rendered. The cut is made in CSS, because how many
+          tiles fill two rows depends on the breakpoint — three columns, then
+          two, then one — and only the stylesheet knows which is in force. */}
+      <div id={gridId} className={`${s.grid} ${expanded ? s.expanded : ""}`}>
         {PROJECTS.map((p) => {
           const Tag = p.href ? "a" : "article";
           return (
@@ -35,6 +44,21 @@ export default function WorkList() {
             </Tag>
           );
         })}
+      </div>
+
+      <div className={s.moreRow}>
+        <button
+          type="button"
+          className={s.more}
+          aria-expanded={expanded}
+          aria-controls={gridId}
+          onClick={() => setExpanded((v) => !v)}
+        >
+          {expanded ? "Show fewer" : `See all ${PROJECTS.length} projects`}
+          <span className={s.chev} aria-hidden="true">
+            ↓
+          </span>
+        </button>
       </div>
     </section>
   );

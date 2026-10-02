@@ -12,6 +12,20 @@
   }
 }
 
+/* Collapsed, the section shows two rows. How many tiles that is depends on the
+   column count, so the cut moves with the breakpoint rather than being a fixed
+   slice in JS. Everything stays in the DOM — hidden tiles are still indexed,
+   and display:none takes them out of the tab order while they are not visible. */
+.grid:not(.expanded) > .tile:nth-child(n + 7) {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .grid:not(.expanded) > .tile:nth-child(n + 5) {
+    display: none;
+  }
+}
+
 .tile {
   display: flex;
   flex-direction: column;
@@ -105,9 +119,63 @@ a.tile:hover .name {
   color: var(--rule);
 }
 
+/* ── see all ──────────────────────────────────────────────────────────── */
+
+.moreRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: border-color 180ms var(--ease), color 180ms var(--ease),
+    background 180ms var(--ease);
+}
+
+.more:hover,
+.more:focus-visible {
+  border-color: var(--debit);
+  color: var(--debit);
+  background: var(--surface);
+}
+
+.chev {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+  transition: transform 180ms var(--ease);
+}
+
+.more[aria-expanded="true"] .chev {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chev {
+    transition: none;
+  }
+}
+
 @media (max-width: 760px) {
   .grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+  /* One column, so two rows is two tiles. */
+  .grid:not(.expanded) > .tile:nth-child(n + 3) {
+    display: none;
   }
   .tile {
     padding: 18px 16px;
