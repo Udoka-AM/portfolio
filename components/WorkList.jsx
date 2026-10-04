@@ -26,21 +26,33 @@ export default function WorkList() {
                 ? { href: p.href, target: "_blank", rel: "noopener noreferrer" }
                 : {})}
             >
-              <div className={s.eyebrow}>
-                <span className={s.kind}>[{p.kind}]</span>
-                {p.featured ? <span className={s.badge}>Featured</span> : null}
+              {/* The face. The name is the artwork — there is no photograph of
+                  a security audit, so the type carries the card instead. */}
+              <div className={s.face}>
+                <div className={s.eyebrow}>
+                  <span className={s.kind}>[{p.kind}]</span>
+                  {p.featured ? <span className={s.badge}>Featured</span> : null}
+                </div>
+
+                <h3 className={s.name}>{p.name}</h3>
+                <p className={s.summary}>{p.summary}</p>
+
+                <ul className={s.tags}>
+                  {p.tags.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
               </div>
 
-              <h3 className={s.name}>{p.name}</h3>
-              <p className={s.line}>{p.line}</p>
-              {/* The flagged rule marks the failure, not the feature. */}
-              <p className={s.hard}>{p.hard}</p>
-
-              <ul className={s.tags}>
-                {p.tags.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
+              {/* The full text, raised from the bottom edge on hover. On touch,
+                  where there is no hover, the stylesheet lets this sit open
+                  rather than hiding the part worth reading behind a gesture
+                  that does not exist. */}
+              <div className={s.reveal} aria-hidden="false">
+                <p className={s.line}>{p.line}</p>
+                {/* The flagged rule marks the failure, not the feature. */}
+                <p className={s.hard}>{p.hard}</p>
+              </div>
             </Tag>
           );
         })}

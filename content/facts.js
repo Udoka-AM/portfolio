@@ -32,13 +32,13 @@ export const FACTS = [
   },
   {
     key: "Documentation",
-    value: "5",
-    note: "Four product doc sites, plus an open Solana resource collection",
+    value: "6",
+    note: "Five product doc sites, plus an open Solana resource collection",
   },
   {
     key: "Blockchains built on",
-    value: "6+",
-    note: "Solana · Polygon · Ethereum · BSC · Polkadot · Arweave",
+    value: "9",
+    note: "Solana · Tempo · Base · Zcash · Polygon · Ethereum · BSC · Polkadot · Arweave",
   },
   {
     key: "Frameworks",

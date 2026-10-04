@@ -41,6 +41,14 @@ export const DOCS = [
       "Public API surface, refresh ceilings, and the wallet reputation model, stated up front.",
   },
   {
+    name: "Corridor",
+    where: "corridor.udokaam.dev",
+    cta: "Read docs",
+    href: "https://corridor.udokaam.dev/",
+    line:
+      "The decision log, the hub-and-spoke routing model, and why settlement, liquidity and privacy each sit on a different chain.",
+  },
+  {
     name: "Nelo",
     where: "nelo.udokaam.dev",
     cta: "Read docs",

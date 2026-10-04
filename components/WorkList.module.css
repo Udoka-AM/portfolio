@@ -26,30 +26,48 @@
   }
 }
 
+/* ── tile ─────────────────────────────────────────────────────────────── */
+
 .tile {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 22px 20px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  min-height: 286px;
   border: 1px solid var(--rule);
   background: var(--surface);
   text-decoration: none;
   color: inherit;
-  transition: border-color 200ms var(--ease), background 200ms var(--ease);
+  transition: border-color 200ms var(--ease);
 }
 
-/* Only tiles that link anywhere should suggest they are clickable. */
+/* A faint wash so the card reads as a surface rather than a block of text,
+   without introducing a colour the rest of the page does not use. */
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--raise), transparent 62%);
+  pointer-events: none;
+}
+
 a.tile:hover {
   border-color: var(--debit);
-  background: var(--raise);
-}
-
-a.tile:hover .name {
-  color: var(--debit);
 }
 
 .featured {
   border-color: var(--debit);
+}
+
+/* ── face ─────────────────────────────────────────────────────────────── */
+
+.face {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  min-height: inherit;
+  padding: 22px 20px;
 }
 
 .eyebrow {
@@ -75,25 +93,27 @@ a.tile:hover .name {
   color: var(--debit);
 }
 
+/* The type is the artwork. Large, tight, and allowed to wrap onto two lines. */
 .name {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
-  font-size: 22px;
-  letter-spacing: -0.02em;
+  font-size: clamp(26px, 2.5vw, 33px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  margin-top: 6px;
   transition: color 200ms var(--ease);
 }
 
-.line {
-  font-size: 14.5px;
-  line-height: 1.55;
+a.tile:hover .name {
+  color: var(--debit);
 }
 
-.hard {
-  font-size: 13.5px;
-  line-height: 1.55;
+.summary {
+  font-size: 14.5px;
+  line-height: 1.5;
   color: var(--muted);
-  border-left: 2px solid var(--flag);
-  padding-left: 13px;
+  max-width: 34ch;
 }
 
 .tags {
@@ -117,6 +137,97 @@ a.tile:hover .name {
 .tags li::before {
   content: "> ";
   color: var(--rule);
+}
+
+/* ── reveal ───────────────────────────────────────────────────────────── */
+
+.reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 20px;
+  background: var(--surface);
+  border-top: 2px solid var(--debit);
+  /* Long copy scrolls inside the panel rather than being clipped. The mask
+     fades the last few lines so an overflowing card reads as "there is more"
+     rather than as a bug — the wheel scrolls it while the pointer is over. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  mask-image: linear-gradient(#000 calc(100% - 26px), transparent);
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 26px), transparent);
+  transform: translateY(100%);
+  transition: transform 320ms var(--ease);
+}
+
+/* Firefox and WebKit both hide this by default on overlay-scrollbar systems;
+   a hairline track is enough of a hint without being furniture. */
+.reveal::-webkit-scrollbar {
+  width: 3px;
+}
+
+.reveal::-webkit-scrollbar-thumb {
+  background: var(--rule);
+}
+
+.line {
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.hard {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  border-left: 2px solid var(--flag);
+  padding-left: 13px;
+}
+
+/* Only raise the panel where a pointer can actually hover. Keyboard users get
+   it on focus, which is the same gesture that reveals the link itself. */
+@media (hover: hover) {
+  .tile:hover .reveal,
+  .tile:focus-visible .reveal,
+  .tile:focus-within .reveal {
+    transform: translateY(0);
+  }
+}
+
+/* No hover on touch, so nothing is hidden behind a gesture that does not
+   exist: the panel sits open under the face and the tile grows to fit. */
+@media (hover: none) {
+  .tile {
+    min-height: 0;
+    /* Nothing is being slid in from off-card any more, so there is nothing to
+       clip — and clipping here would cut the panel that now sits in flow. */
+    overflow: visible;
+  }
+  .face {
+    /* height:100% against a tile whose height comes from its own content
+       resolves circularly: the face swallowed the whole card and pushed the
+       tags to the bottom of a dead gap. In flow it sizes to its content. */
+    height: auto;
+    min-height: 0;
+    padding-bottom: 14px;
+  }
+  .reveal {
+    position: static;
+    transform: none;
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+    padding-top: 0;
+    border-top: 0;
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+  }
 }
 
 /* ── see all ──────────────────────────────────────────────────────────── */
@@ -177,10 +288,10 @@ a.tile:hover .name {
   .grid:not(.expanded) > .tile:nth-child(n + 3) {
     display: none;
   }
-  .tile {
+  .face {
     padding: 18px 16px;
   }
-  .name {
-    font-size: 20px;
+  .reveal {
+    padding: 18px 16px;
   }
 }

@@ -16,17 +16,21 @@
 export const PROJECTS = [
   {
     name: "Corridor",
+    summary:
+      "Stablecoin settlement and treasury rails for payment companies moving money into and out of Africa.",
     kind: "settlement · live demo",
     featured: true,
-    href: "https://udoka-am.github.io/corridor/#economics",
+    href: "https://corridorapp.udokaam.dev/",
     line:
-      "Stablecoin settlement and treasury rails for licensed payment companies moving money into and out of Africa. Collect EUR or USD abroad and pay out NGN or KES without pre-funding foreign bank accounts — Tempo as the settlement hub, Solana for on and off-ramp liquidity, and an optional Zcash shielded lane for supplier payments, all reconciled against one double-entry ledger.",
+      "Collect EUR or USD abroad and pay out NGN or KES without pre-funding foreign bank accounts. Tempo is the settlement hub, Solana carries on and off-ramp liquidity, an optional Zcash lane settles suppliers privately, and one double-entry ledger reconciles all three.",
     hard:
       "A live testnet hop burned the USDC and Circle's attestation completed, but the final mint is restricted to Across's own relayer, which never ran it. Every leg is compensated independently now, and funds sit in a Corridor address between hops rather than in flight.",
     tags: ["TypeScript", "Tempo", "Solana", "Zcash FROST"],
   },
   {
     name: "Tempo × Solana Swap",
+    summary:
+      "Non-custodial stablecoin swaps between Tempo and Solana, composed through Base.",
     kind: "live",
     featured: true,
     href: "https://tempo-solana-swap.pages.dev/",
@@ -38,6 +42,8 @@ export const PROJECTS = [
   },
   {
     name: "Nelo",
+    summary:
+      "Card-free payments on the phone a shopkeeper already owns — and the sale still completes offline.",
     kind: "in progress · solana mobile",
     featured: true,
     href: "https://udoka-am.github.io/nelo/",
@@ -49,6 +55,8 @@ export const PROJECTS = [
   },
   {
     name: "Arc",
+    summary:
+      "Cross-border stablecoin and fiat infrastructure for the EU↔Africa corridor.",
     kind: "simulation · docs",
     href: "https://arc.udokaam.dev/",
     line:
@@ -59,6 +67,8 @@ export const PROJECTS = [
   },
   {
     name: "Agents Circle",
+    summary:
+      "A marketplace for autonomous trading agents, with custody-preserving vaults built twice.",
     kind: "two runtimes",
         href: "https://agentscircle.network",
     line:
@@ -69,6 +79,8 @@ export const PROJECTS = [
   },
   {
     name: "RetinaOS",
+    summary:
+      "The intelligence layer for Robinhood Chain — token discovery, wallet reputation, live analysis.",
     kind: "live",
         href: "https://retinaos.xyz",
     line:
@@ -79,6 +91,8 @@ export const PROJECTS = [
   },
   {
     name: "Fiat-Crypto Tracker",
+    summary:
+      "Protocol-level MagicBlock ephemeral rollup integration for cross-border rate infrastructure.",
     kind: "protocol · magicblock",
     href: "https://github.com/Udoka-AM/fiat-crypto-tracker",
     line:
@@ -89,6 +103,8 @@ export const PROJECTS = [
   },
   {
     name: "bagsMarkets",
+    summary:
+      "Market intelligence and trading operations for Solana, built around Bags.",
     kind: "in progress",
     href: "https://github.com/Udoka-AM/bagsMarket",
     line:
@@ -99,6 +115,8 @@ export const PROJECTS = [
   },
   {
     name: "SprintIQ",
+    summary:
+      "An on-chain quiz platform for communities, with rewards settled on Solana.",
     kind: "live · grant",
     href: "https://github.com/Udoka-AM/SprintIQ",
     line:
@@ -109,6 +127,8 @@ export const PROJECTS = [
   },
   {
     name: "StakeZone",
+    summary:
+      "A global prediction market on Fantasy Premier League performance, settled on Solana.",
     kind: "in progress",
     href: "https://github.com/Udoka-AM/stakezone",
     line:
@@ -119,6 +139,8 @@ export const PROJECTS = [
   },
   {
     name: "Orynth Lab",
+    summary:
+      "An operating-intelligence layer for founders — from market gap to launch to monitoring.",
     kind: "in progress",
     href: "https://github.com/Udoka-AM/orynthLabs",
     line:
@@ -129,6 +151,8 @@ export const PROJECTS = [
   },
   {
     name: "Solana Lending Protocol Audit",
+    summary:
+      "A security audit of a Solana lending protocol: eight findings, each with a working exploit.",
     kind: "security · rektoff",
     href: "https://github.com/Udoka-AM/Solana-Lending-Protocol-AUDIT",
     line:
