@@ -20,7 +20,7 @@ export const PROJECTS = [
       "Sealed-bid auctions on Zcash. The clearing price is public; the bidders are not.",
     kind: "zecathon \u00b7 private markets",
     featured: true,
-    href: "https://seaforge.udokaam.dev/",
+    href: "https://sealforge.udokaam.dev/",
     line:
       "An open-source kit for private, verifiable sales settled in shielded ZEC. Bid from any Zcash wallet by scanning one QR, escrow spend authority is split across three trustees with FROST 2-of-3, and after close anyone can rescan the chain with the published viewing key and recompute the price, the winners and every bidder\u2019s outcome.",
     hard:
