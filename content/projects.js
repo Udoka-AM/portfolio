@@ -15,6 +15,19 @@
 
 export const PROJECTS = [
   {
+    name: "sealForge",
+    summary:
+      "Sealed-bid auctions on Zcash. The clearing price is public; the bidders are not.",
+    kind: "zecathon \u00b7 private markets",
+    featured: true,
+    href: "https://seaforge.udokaam.dev/",
+    line:
+      "An open-source kit for private, verifiable sales settled in shielded ZEC. Bid from any Zcash wallet by scanning one QR, escrow spend authority is split across three trustees with FROST 2-of-3, and after close anyone can rescan the chain with the published viewing key and recompute the price, the winners and every bidder\u2019s outcome.",
+    hard:
+      "A bid memo\u2019s refund address was stored unchecked, so a single malformed one broke every refund batch it joined \u2014 blocking refunds for everyone in that batch. Unusable addresses are now dropped at ingest: the bid still counts, and its refund goes to manual review.",
+    tags: ["Rust", "Zcash", "FROST", "WASM"],
+  },
+  {
     name: "Corridor",
     summary:
       "Stablecoin settlement and treasury rails for payment companies moving money into and out of Africa.",
@@ -45,7 +58,6 @@ export const PROJECTS = [
     summary:
       "Card-free payments on the phone a shopkeeper already owns — and the sale still completes offline.",
     kind: "in progress · solana mobile",
-    featured: true,
     href: "https://udoka-am.github.io/nelo/",
     line:
       "Accept payments on the Android phone a shopkeeper already owns. The money settles in USDC on Solana, the merchant sees their own currency, and a licensed partner pays it into their own bank — and the sale still completes when neither phone has a network.",

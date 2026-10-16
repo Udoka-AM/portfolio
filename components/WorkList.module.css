@@ -284,6 +284,11 @@ a.tile:hover .name {
   .grid {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* One per row, so there is no neighbour to line up with — the uniform height
+     stops being useful and just leaves a gap under short copy. */
+  .tile {
+    min-height: 190px;
+  }
   /* One column, so two rows is two tiles. */
   .grid:not(.expanded) > .tile:nth-child(n + 3) {
     display: none;
