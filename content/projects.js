@@ -57,7 +57,7 @@ export const PROJECTS = [
     name: "Nelo",
     summary:
       "Card-free payments on the phone a shopkeeper already owns — and the sale still completes offline.",
-    kind: "in progress · solana mobile",
+    kind: "submitted · solana mobile",
     href: "https://udoka-am.github.io/nelo/",
     line:
       "Accept payments on the Android phone a shopkeeper already owns. The money settles in USDC on Solana, the merchant sees their own currency, and a licensed partner pays it into their own bank — and the sale still completes when neither phone has a network.",
