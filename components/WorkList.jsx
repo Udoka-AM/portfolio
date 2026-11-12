@@ -10,7 +10,7 @@ export default function WorkList() {
 
   return (
     <section className="section" id="projects">
-      <h2 className="sectionHead">Featured projects</h2>
+      <h2 className="sectionHead">More projects</h2>
 
       {/* Every tile is rendered. The cut is made in CSS, because how many
           tiles fill two rows depends on the breakpoint — three columns, then

@@ -1,4 +1,5 @@
 import { PROJECTS } from "@/content/projects";
+import { FLAGSHIP } from "@/content/flagship";
 import { DOCS } from "@/content/docs";
 import { getAllPosts } from "@/lib/posts";
 import { SITE, PROFILES } from "@/content/site";
@@ -22,16 +23,22 @@ export default function StructuredData() {
     "@id": `${ORIGIN}/#person`,
     name: SITE.legalName,
     alternateName: [SITE.name, ...SITE.alternateNames],
-    description: SITE.intro,
+    description: `${SITE.role}. ${SITE.tagline} ${SITE.intro}`,
     url: ORIGIN,
     email: "udoka.am@gmail.com",
     jobTitle: SITE.role,
     sameAs: PROFILES,
     knowsAbout: [
-      "Backend engineering",
-      "Blockchain infrastructure",
       "Stablecoin payments",
+      "Cross-border payouts",
+      "Blockchain infrastructure",
+      "AI trading agents",
       "Solana",
+      "Tempo",
+      "Stellar",
+      "Hyperliquid",
+      "Zcash",
+      "Backend engineering",
       "Developer relations",
       "Technical documentation",
     ],
@@ -53,15 +60,30 @@ export default function StructuredData() {
       author: { "@id": `${ORIGIN}/#person` },
       })),
     ],
-    // Only projects with a public destination are worth asserting.
-    workExample: PROJECTS.filter((p) => p.href).map((p) => ({
+    // The flagships are products, so they are asserted as applications with
+    // this person as creator; that is the link search engines and AI
+    // assistants need to connect the name to the work.
+    workExample: [
+      ...FLAGSHIP.map((p) => ({
+        "@type": "SoftwareApplication",
+        "@id": `${ORIGIN}/#${p.id}`,
+        name: p.name,
+        applicationCategory: "FinanceApplication",
+        description: p.problem,
+        url: (p.links.find((l) => !l.href.includes("github.com")) ?? p.links[0]).href,
+        sameAs: p.links.map((l) => l.href),
+        creator: { "@id": `${ORIGIN}/#person` },
+      })),
+      // Only projects with a public destination are worth asserting.
+      ...PROJECTS.filter((p) => p.href).map((p) => ({
       "@type": "SoftwareSourceCode",
       name: p.name,
       abstract: p.line,
       url: p.href,
       programmingLanguage: p.tags,
       author: { "@id": `${ORIGIN}/#person` },
-    })),
+      })),
+    ],
   };
 
   return (

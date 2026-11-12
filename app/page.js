@@ -1,7 +1,11 @@
 import TopBar from "@/components/TopBar";
 import Hero from "@/components/Hero";
-import SpecPlate from "@/components/SpecPlate";
+import Flagship from "@/components/Flagship";
+import Receipts from "@/components/Receipts";
 import WorkList from "@/components/WorkList";
+import WorkWithMe from "@/components/WorkWithMe";
+import Now from "@/components/Now";
+import SpecPlate from "@/components/SpecPlate";
 import WorkedWith from "@/components/WorkedWith";
 import DocsList from "@/components/DocsList";
 import WritingList from "@/components/WritingList";
@@ -13,11 +17,15 @@ export default function Home() {
       <TopBar />
       <main>
         <Hero />
-        <SpecPlate />
+        <Flagship />
+        <Receipts />
         <WorkList />
+        <WorkWithMe />
+        <Now />
+        <SpecPlate />
         <WorkedWith />
-        <DocsList />
         <WritingList />
+        <DocsList />
       </main>
       <SiteFooter />
     </div>

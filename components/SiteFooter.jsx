@@ -19,6 +19,7 @@ export default function SiteFooter() {
       {/* The full legal name, stated once. Rare enough to be a unique search
           term, and body text is indexed where structured data alone is not. */}
       <p className={s.legal}>{SITE.legalName}</p>
+      <p className={s.legal}>blockchain:simplified</p>
     </footer>
   );
 }
