@@ -31,7 +31,7 @@ const mono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL("https://udokaam.dev"),
   alternates: { canonical: "/" },
-  title: `${SITE.name} — ${SITE.role}`,
+  title: `${SITE.name} — ${SITE.role}. ${SITE.tagline}`,
   description: SITE.intro,
   icons: {
     icon: [
@@ -43,17 +43,17 @@ export const metadata = {
     apple: [{ url: "/apple-touch-icon-180.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: `${SITE.name} — ${SITE.role}`,
-    description: SITE.tagline,
+    title: `${SITE.name} — ${SITE.role}. ${SITE.tagline}`,
+    description: SITE.intro,
     type: "profile",
     url: "https://udokaam.dev/",
     siteName: SITE.name,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${SITE.name} — ${SITE.role}` }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${SITE.name} — ${SITE.role}. ${SITE.tagline}` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.role}`,
-    description: SITE.tagline,
+    title: `${SITE.name} — ${SITE.role}. ${SITE.tagline}`,
+    description: SITE.intro,
     creator: "@Udoka_AM",
     images: ["/og.png"],
   },

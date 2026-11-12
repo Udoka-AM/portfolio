@@ -29,6 +29,13 @@
   --step-display: clamp(38px, 6.4vw, 62px);
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* The one brand accent, shared with the X and LinkedIn graphics. Used as a
+     strand, never as a fill behind text. */
+  --brand: linear-gradient(90deg, #22d3ee, #3b82f6 38%, #8b5cf6 70%, #ec4899);
+  /* Network status: proven on mainnet vs. not yet. Same meaning everywhere. */
+  --proven: #0d9488;
+  --pending: #b45309;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -43,6 +50,8 @@
     --raise: rgba(232, 234, 230, 0.04);
     --shadow: rgba(0, 0, 0, 0.55);
     --grid: rgba(232, 234, 230, 0.07);
+    --proven: #2dd4bf;
+    --pending: #fbbf24;
   }
 }
 
@@ -57,6 +66,8 @@
   --raise: rgba(232, 234, 230, 0.04);
   --shadow: rgba(0, 0, 0, 0.55);
   --grid: rgba(232, 234, 230, 0.07);
+  --proven: #2dd4bf;
+  --pending: #fbbf24;
 }
 
 /* --- reset ---------------------------------------------------------------- */
@@ -221,4 +232,45 @@ article.tile-interactive::after {
   a.tile-interactive:focus-visible {
     transform: none;
   }
+}
+
+/* --- brand strand ----------------------------------------------------------
+   A 4px gradient across the very top of every page: the same strand that runs
+   along the top of every graphic on X and LinkedIn, so the three read as one. */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--brand);
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* --- network badge ---------------------------------------------------------
+   Shared by the hero chips, flagship proof lines and receipts. */
+.net {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--pending);
+}
+
+.net::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.net[data-net="mainnet"] {
+  color: var(--proven);
 }

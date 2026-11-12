@@ -61,3 +61,11 @@
     font-size: 13px;
   }
 }
+
+/* Five links do not fit beside the name on a phone. Keep the one that matters
+   most to a visitor arriving cold, plus the theme toggle. */
+@media (max-width: 760px) {
+  .nav a:nth-last-of-type(n + 2) {
+    display: none;
+  }
+}

@@ -37,13 +37,13 @@ export const FACTS = [
   },
   {
     key: "Blockchains built on",
-    value: "9",
-    note: "Solana · Tempo · Base · Zcash · Polygon · Ethereum · BSC · Polkadot · Arweave",
+    value: "12",
+    note: "Solana · Tempo · Stellar · Hyperliquid · Zcash · Base · Robinhood Chain · Polygon · Ethereum · BSC · Polkadot · Arweave",
   },
   {
     key: "Frameworks",
     value:
-      "Rust · Anchor · Solidity · Foundry · TypeScript · Node.js · NestJS · Next.js · React · " +
+      "Rust · Anchor · Solidity · Foundry · Soroban · TypeScript · Node.js · NestJS · Next.js · React · " +
       "Tailwind · Prisma · PostgreSQL · pgvector · Docker · web3.js · Mintlify",
     words: true,
     wide: true,

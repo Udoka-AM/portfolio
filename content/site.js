@@ -15,13 +15,13 @@ export const SITE = {
     "Abasi-ibiangake Udoka",
     "Monday Udoka",
   ],
-  role: "Software engineer",
+  role: "Builder",
+  // The one line every surface repeats: X, LinkedIn, this page, the meta tags.
+  tagline: "Money infrastructure you can verify.",
   intro:
-    "Software engineer building around blockchain, AI and cloud technologies while making it usable by the developers who adopt it.",
+    "I build payment, payout and trading infrastructure across Solana, Tempo, Stellar, Hyperliquid and Zcash, and every claim on this page names the network it ran on.",
   focus:
-    "Currently interested in agentic finance, cross-border stablecoin rails, onchain markets, and data security infrastructure.",
-  // Used for <title>, og:title, and the JSON-LD person block.
-  tagline: "Backend, blockchain, and developer-facing infrastructure.",
+    "Three years Solana-native. Now building on each chain for the primitive it does best, in the open, with contributors welcome.",
 };
 
 // href values are real URLs so the footer works before anything else is built.
@@ -48,7 +48,15 @@ export const PROFILES = [
 ];
 
 export const NAV = [
+  { label: "Building", href: "#building" },
+  { label: "Receipts", href: "#receipts" },
   { label: "Projects", href: "#projects" },
-  { label: "Docs", href: "#docs" },
   { label: "Writing", href: "#writing" },
+  { label: "Work with me", href: "#work-with-me" },
 ];
+
+// The hero's one call to action. Point it at the newest build report.
+export const LATEST_REPORT = {
+  label: "Read the latest build report",
+  href: "/writing/three-years-on-solana-two-months-across-five-chains/",
+};

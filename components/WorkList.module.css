@@ -1,29 +1,15 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-top: 20px;
 }
 
-/* Three columns need the copy to breathe less, not the tile to shrink. */
-@media (max-width: 1100px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Collapsed, the section shows two rows. How many tiles that is depends on the
-   column count, so the cut moves with the breakpoint rather than being a fixed
-   slice in JS. Everything stays in the DOM — hidden tiles are still indexed,
-   and display:none takes them out of the tab order while they are not visible. */
-.grid:not(.expanded) > .tile:nth-child(n + 7) {
+/* Collapsed, the section shows the four headline projects. Everything stays in
+   the DOM — hidden tiles are still indexed, and display:none takes them out of
+   the tab order while they are not visible. */
+.grid:not(.expanded) > .tile:nth-child(n + 5) {
   display: none;
-}
-
-@media (max-width: 1100px) {
-  .grid:not(.expanded) > .tile:nth-child(n + 5) {
-    display: none;
-  }
 }
 
 /* ── tile ─────────────────────────────────────────────────────────────── */
@@ -113,7 +99,7 @@ a.tile:hover .name {
   font-size: 14.5px;
   line-height: 1.5;
   color: var(--muted);
-  max-width: 34ch;
+  max-width: 48ch;
 }
 
 .tags {
@@ -288,10 +274,6 @@ a.tile:hover .name {
      stops being useful and just leaves a gap under short copy. */
   .tile {
     min-height: 190px;
-  }
-  /* One column, so two rows is two tiles. */
-  .grid:not(.expanded) > .tile:nth-child(n + 3) {
-    display: none;
   }
   .face {
     padding: 18px 16px;
