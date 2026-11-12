@@ -16,12 +16,14 @@ export const SITE = {
     "Monday Udoka",
   ],
   role: "Builder",
-  // The one line every surface repeats: X, LinkedIn, this page, the meta tags.
-  tagline: "Money infrastructure you can verify.",
+  // Shown after the role in the hero and in every title and meta tag. Kept
+  // broad on purpose: the projects show the payments depth, this line keeps
+  // engineering and developer-relations roles in view.
+  tagline: "Software engineering and developer relations.",
   intro:
-    "I build payment, payout and trading infrastructure across Solana, Tempo, Stellar, Hyperliquid and Zcash, and every claim on this page names the network it ran on.",
+    "I build across Solana, Tempo, Stellar, Hyperliquid and Zcash: payments and payouts, trading infrastructure, privacy tooling, and the docs and developer experience that get other builders shipping. Every claim on this page names the network it ran on.",
   focus:
-    "Three years Solana-native. Now building on each chain for the primitive it does best, in the open, with contributors welcome.",
+    "Five years in web3, from developer relations to protocol engineering. Open to software engineering and developer relations roles, and always to contributors and collaborators.",
 };
 
 // href values are real URLs so the footer works before anything else is built.
@@ -56,7 +58,9 @@ export const NAV = [
 ];
 
 // The hero's one call to action. Point it at the newest build report.
+// Set `href` to a published article to make the hero button live. While it is
+// null the button shows as "coming soon" and links nowhere.
 export const LATEST_REPORT = {
-  label: "Read the latest build report",
-  href: "/writing/three-years-on-solana-two-months-across-five-chains/",
+  label: "Build report",
+  href: null,
 };
