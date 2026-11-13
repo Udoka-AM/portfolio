@@ -11,11 +11,8 @@ const mail = (subject) =>
 export const ROUTES = [
   {
     who: "Investors",
-    line: "Monthly build reports in public, and a deck on request.",
-    links: [
-      { label: "Latest build report", href: "/writing/three-years-on-solana-two-months-across-five-chains/" },
-      { label: "Request the deck", href: mail("Investor: deck request") },
-    ],
+    line: "Everything here is built in the open, and a deck is available on request.",
+    links: [{ label: "Request the deck", href: mail("Investor: deck request") }],
   },
   {
     who: "Partners and integrations",
@@ -28,8 +25,8 @@ export const ROUTES = [
     links: [{ label: "Talk ecosystems", href: mail("Ecosystem / grant") }],
   },
   {
-    who: "Roles, contributions and advisory",
-    line: "Payments infrastructure, protocol engineering and developer relations.",
+    who: "Roles and advisory",
+    line: "Open to software engineering and developer relations roles, and to advisory work.",
     links: [
       { label: "Request my CV", href: mail("Role / advisory: CV request") },
       { label: "LinkedIn", href: "https://linkedin.com/in/udokaam" },

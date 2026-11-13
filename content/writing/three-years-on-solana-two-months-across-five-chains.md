@@ -3,7 +3,7 @@ title: "Three years on Solana, two months across five chains: an honest build re
 topic: "build report · Nov 2026"
 blurb: "Why I started building on Tempo, Stellar, Hyperliquid and Zcash alongside Solana, what each project does, the chain feature it rests on, and exactly what is proven on which network."
 date: 2026-11-09
-draft: false
+draft: true
 ---
 
 For three years I built on one chain. Solana is where I learned how money moves on-chain. I started as a university student shipping my first products, then worked in developer relations at Superteam Nigeria, MagicBlock and QuickNode, taught more than 5,000 developers, and finally built Nelo, a merchant payments app that is now live on Solana mainnet.

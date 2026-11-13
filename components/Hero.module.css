@@ -94,6 +94,16 @@
   background: var(--debit);
 }
 
+/* The call to action before there is anything to link to: visibly a button,
+   plainly not clickable. */
+.soon,
+.soon:hover {
+  background: transparent;
+  color: var(--muted);
+  border: 1px dashed var(--rule);
+  cursor: default;
+}
+
 .secondary {
   font-size: 15px;
   text-decoration: none;

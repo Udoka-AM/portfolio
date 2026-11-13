@@ -26,7 +26,7 @@ export default function StructuredData() {
     description: `${SITE.role}. ${SITE.tagline} ${SITE.intro}`,
     url: ORIGIN,
     email: "udoka.am@gmail.com",
-    jobTitle: SITE.role,
+    jobTitle: ["Builder", "Software Engineer", "Developer Relations"],
     sameAs: PROFILES,
     knowsAbout: [
       "Stablecoin payments",

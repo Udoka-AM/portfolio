@@ -32,9 +32,15 @@ export default function Hero() {
       </ul>
 
       <div className={s.ctas}>
-        <Link className={s.primary} href={LATEST_REPORT.href}>
-          {LATEST_REPORT.label} <span aria-hidden="true">→</span>
-        </Link>
+        {LATEST_REPORT.href ? (
+          <Link className={s.primary} href={LATEST_REPORT.href}>
+            Read the latest {LATEST_REPORT.label.toLowerCase()} <span aria-hidden="true">→</span>
+          </Link>
+        ) : (
+          <span className={`${s.primary} ${s.soon}`} aria-disabled="true">
+            {LATEST_REPORT.label} · coming soon
+          </span>
+        )}
         <a className={s.secondary} href="#work-with-me">
           Work with me
         </a>
