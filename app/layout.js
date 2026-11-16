@@ -8,14 +8,14 @@ import "./globals.css";
 // Google, no layout shift, and the CSS variables land on <html>.
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "600", "800"],
+  weight: ["400", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
 
 const body = Public_Sans({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-body",
   display: "swap",
@@ -30,7 +30,12 @@ const mono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL("https://udokaam.dev"),
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    // Lets feed readers, and importers like dev.to and Hashnode, discover the
+    // full-text feed from any page.
+    types: { "application/rss+xml": [{ url: "/feed.xml", title: "Udoka A.M. — Writing" }] },
+  },
   title: `${SITE.name} — ${SITE.role}. ${SITE.tagline}`,
   description: SITE.intro,
   icons: {

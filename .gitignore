@@ -5,3 +5,6 @@ out
 .DS_Store
 *.tsbuildinfo
 .vercel
+
+# Share cards, regenerated on every build by scripts/og-images.mjs
+public/writing/*/og.png

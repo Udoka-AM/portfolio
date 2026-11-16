@@ -60,4 +60,4 @@ render `0.00` to anything screenshotting the page.
   as plain text rather than a dead link. Add links as pieces are published.
 - Ecosystems count in `content/ledger.js` is flagged `TODO` — placeholder pending
   the full historical list.
-- No `opengraph-image`. Add one before sharing the link anywhere.
+- Homepage still uses the static `public/og.png`; posts get generated cards (see `content/writing/_README.md`).

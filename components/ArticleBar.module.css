@@ -1,0 +1,105 @@
+.bar {
+  --progress: 0;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  /* Clears the 4px brand strand fixed to the top of every page. */
+  padding-top: 4px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+}
+
+.home {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* The UD mark, drawn from the same SVG as the favicon and tinted to the
+   current ink colour so it follows the theme toggle, not just the OS. */
+.mark {
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: url("/udoka-mark.svg") center / contain no-repeat;
+  mask: url("/udoka-mark.svg") center / contain no-repeat;
+}
+
+.home:hover {
+  color: var(--debit);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav a {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 200ms var(--ease);
+}
+
+.nav a:hover {
+  color: var(--debit);
+}
+
+.toggle {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  padding: 6px 11px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: border-color 200ms var(--ease), color 200ms var(--ease);
+}
+
+.toggle:hover {
+  border-color: var(--debit);
+  color: var(--debit);
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--brand);
+  transform: scaleX(var(--progress));
+  transform-origin: left center;
+}
+
+@media (max-width: 620px) {
+  .inner {
+    padding: 10px var(--gutter);
+  }
+  .nav {
+    gap: 16px;
+  }
+  .wideOnly {
+    display: none;
+  }
+}

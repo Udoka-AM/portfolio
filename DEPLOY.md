@@ -58,7 +58,6 @@ either clears later.
 - `content/writing.js` entries take an optional `href`; without one they render
   as plain text rather than a dead link.
 - Ecosystems count in `content/ledger.js` is still flagged `TODO`.
-- No `opengraph-image`, so the link previews as a bare URL.
 - **The domain is set not to renew.** The `.DEV` subscription is `non_renewing`
   with auto-renew off and expires **2027-09-01**. Turn auto-renew on at
   Hostinger to keep it.
