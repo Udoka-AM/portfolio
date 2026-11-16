@@ -32,8 +32,8 @@ export const FACTS = [
   },
   {
     key: "Documentation",
-    value: "6",
-    note: "Five product doc sites, plus an open Solana resource collection",
+    value: "8",
+    note: "Seven product doc sites, plus an open Solana resource collection",
   },
   {
     key: "Blockchains built on",
