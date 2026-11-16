@@ -1,13 +1,13 @@
 /* --- layout ---------------------------------------------------------------
-   One reading column. Text, figures, tables and code all share the same width,
-   so the prose lines up with the edges of every diagram — the way Medium,
-   Hashnode and dev.to lay out a post. The column is wide (800px) and the type
-   is large (20px) so a line still lands at ~75 characters, the comfortable
-   range for long reading. Figures stay sharp beyond that width through
-   click-to-zoom (components/ImageZoom.jsx). */
+   Two widths. Prose sits in a 900px reading column; figures, code blocks and
+   tables break out of it to a wider 1200px stage on desktop, so diagrams and
+   long lines of code get room without stretching the text past a comfortable
+   line length. Below ~1000px everything shares the one fluid column. Figures
+   stay sharp beyond their width through click-to-zoom (ImageZoom.jsx). */
 
 .post {
-  --col: 800px;
+  --col: 900px;
+  --wide: 1200px;
   --text: clamp(18px, 1.1vw + 13px, 20px);
   --lh: 1.78;
 
@@ -359,6 +359,44 @@
   border-radius: 4px;
 }
 
+/* A fenced block renders as .code-block: a header naming the language, then
+   the source. The block is always dark, in both themes, like an editor. */
+.body :global(.code-block) {
+  margin: 1.9em 0;
+  background: #0f1317;
+  border: 1px solid #242a2c;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.55);
+}
+
+.body :global(.code-head) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: #161b20;
+  border-bottom: 1px solid #242a2c;
+}
+
+/* A small brand-coloured dot ahead of the language name. */
+.body :global(.code-head)::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.body :global(.code-lang) {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a4aea8;
+}
+
 .body :global(pre) {
   overflow-x: auto;
   background: #0f1317;
@@ -368,14 +406,104 @@
   padding: 20px 22px;
   margin: 1.8em 0;
   tab-size: 2;
+  /* Set on the pre itself: a line box takes its height from the block's own
+     strut, so the prose's 1.78 line-height would otherwise space code out. */
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.body :global(.code-block pre) {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 18px 22px 20px;
 }
 
 .body :global(pre code) {
   background: none;
   padding: 0;
-  font-size: 14.5px;
-  line-height: 1.65;
+  font-size: inherit;
+  line-height: inherit;
   color: inherit;
+  /* Code keeps its line breaks; long lines scroll inside the block. */
+  white-space: pre;
+  overflow-wrap: normal;
+}
+
+/* Syntax colours, set by highlight.js at build time (lib/posts.js). Drawn
+   from the brand strand — cyan, blue, violet, pink — plus a green for strings
+   and an amber for numbers, all at AA contrast on the dark block. */
+.body :global(.hl-comment),
+.body :global(.hl-quote) {
+  color: #7f8a93;
+  font-style: italic;
+}
+
+.body :global(.hl-keyword),
+.body :global(.hl-selector-tag),
+.body :global(.hl-doctag),
+.body :global(.hl-meta .hl-keyword) {
+  color: #c4a7ff;
+}
+
+.body :global(.hl-string),
+.body :global(.hl-regexp),
+.body :global(.hl-template-tag),
+.body :global(.hl-addition) {
+  color: #9fdfaa;
+}
+
+.body :global(.hl-number),
+.body :global(.hl-literal),
+.body :global(.hl-symbol),
+.body :global(.hl-bullet) {
+  color: #f6b26b;
+}
+
+.body :global(.hl-title),
+.body :global(.hl-title.function_),
+.body :global(.hl-section) {
+  color: #79c0ff;
+}
+
+.body :global(.hl-type),
+.body :global(.hl-built_in),
+.body :global(.hl-title.class_),
+.body :global(.hl-selector-class) {
+  color: #5fdcec;
+}
+
+.body :global(.hl-attr),
+.body :global(.hl-attribute),
+.body :global(.hl-property),
+.body :global(.hl-variable.language_),
+.body :global(.hl-name) {
+  color: #f59cc8;
+}
+
+.body :global(.hl-params),
+.body :global(.hl-variable),
+.body :global(.hl-template-variable),
+.body :global(.hl-subst) {
+  color: #e3e7e4;
+}
+
+.body :global(.hl-meta),
+.body :global(.hl-punctuation),
+.body :global(.hl-operator) {
+  color: #a4aea8;
+}
+
+.body :global(.hl-deletion) {
+  color: #ff9a9a;
+}
+
+.body :global(.hl-emphasis) {
+  font-style: italic;
+}
+
+.body :global(.hl-strong) {
+  font-weight: 600;
 }
 
 /* --- figures ------------------------------------------------------------ */
@@ -605,6 +733,37 @@
   color: var(--debit);
 }
 
+/* --- desktop: wide elements break out of the text column ---------------- */
+
+@media (min-width: 1000px) {
+  .post {
+    /* The stage: up to --wide, never closer than a gutter to the window
+       edge (the extra 16px leaves room for a classic scrollbar). */
+    --bleed: min(var(--wide), calc(100vw - 2 * var(--gutter) - 16px));
+  }
+  .body :global(figure),
+  .body :global(.code-block),
+  .body :global(.table-scroll) {
+    width: var(--bleed);
+    max-width: none;
+    margin-left: calc(50% - var(--bleed) / 2);
+    margin-right: 0;
+  }
+  .body :global(.code-block) {
+    margin-top: 2.2em;
+    margin-bottom: 2.2em;
+  }
+  .body :global(.code-head) {
+    padding: 11px 26px;
+  }
+  .body :global(.code-block pre) {
+    padding: 22px 26px 24px;
+  }
+  .body :global(pre) {
+    font-size: 15px;
+  }
+}
+
 /* --- phones ------------------------------------------------------------- */
 
 @media (max-width: 620px) {
@@ -626,6 +785,7 @@
      pixel of the screen; the prose keeps its gutters. */
   .body :global(figure),
   .body :global(.table-scroll),
+  .body :global(.code-block),
   .body :global(pre) {
     margin-left: calc(-1 * var(--gutter));
     margin-right: calc(-1 * var(--gutter));
@@ -645,10 +805,14 @@
   .body :global(td) {
     padding: 10px 12px;
   }
-  .body :global(pre) {
+  .body :global(pre),
+  .body :global(.code-block pre) {
     padding: 16px var(--gutter);
   }
-  .body :global(pre code) {
+  .body :global(.code-head) {
+    padding: 9px var(--gutter);
+  }
+  .body :global(pre) {
     font-size: 13.5px;
   }
   .authorCard {
