@@ -2,14 +2,15 @@
 title: "The Zcash stack after NU7: from zcashd to an all-Rust system, and how one transaction is laid out across four pools"
 topic: "zcash from the protocol up · lecture 1"
 blurb: "Lecture 1 of a ten-part engineering series. We follow one shielded payment through every program in today's Zcash stack, then take its 15,478 bytes apart field by field, on Zcash testnet."
-draft: true
+draft: false
+date: 2026-11-16
 ---
 
 ![The Zcash stack after NU7, and one transaction laid out across four pools](/writing/zcash-stack-after-nu7-one-transaction-four-pools/cover.png)
 
 **If you sent one shielded payment on Zcash today, which programs would touch it, what would each of them see, and where in its bytes would the money actually be?**
 
-That is the question we are going to answer in this lecture, and I want to answer it properly, the way you would want it answered if you were about to put a payments backend on top of this chain. By the end of the session you will be able to draw the whole stack from memory, point at the program that owns each job, and read a real Zcash transaction byte by byte with a forty-line script you wrote yourself.
+That is the question we are going to answer in this lecture, and I want to answer it properly, the way you would want it answered if you were about to put a payments backend on top of this chain. By the end of the session you will be able to draw the whole stack from memory, point at the program that owns each job, and read a real Zcash transaction byte by byte with a short script you've written and run yourself.
 
 **Welcome to the first lecture of "Zcash from the protocol up".** This is a ten-part series for backend engineers who know distributed systems but have not worked on Zcash. Every lecture adds one working part to the same system, a shielded payout backend, so the series ends with something you can run rather than a pile of notes. The running example is the shielded lane I built for Corridor Finance, which pays suppliers privately on Zcash testnet and lets an auditor check one customer's payments with a viewing key. The contrast case, where the same Zcash parts are used under a different trust model, is sealForge, my sealed-bid auction system, also on testnet. I will bring both in where they are evidence for a point, never as the point itself.
 
@@ -52,7 +53,7 @@ Zcash launched in 2016 with one shielded pool, **Sprout**. In 2018 the **Sapling
 
 Then came 2026. On 29 May, security researcher Taylor Hornby, who had been asked to run an AI-assisted audit of the Orchard protocol, reported a soundness vulnerability in the Orchard Action circuit implementation. ZIP 257 records the response in plain terms: the bug "could have allowed balance violation and theft of funds", so use of Orchard was disabled immediately, and a corrected circuit was deployed in the **NU6.2** upgrade [ZIP 257].
 
-Fixing the circuit closed the hole. It did not, by itself, restore confidence in the money already sitting in Orchard. That is what **NU6.3** was for. It introduced a fourth shielded pool, **Ironwood**, activated on mainnet at height 3,428,143 [ZIP 258]. Ironwood reuses the Orchard protocol almost unchanged, but it starts with a clean state, its supply integrity was backed by formal verification from the start, and every note in it is *quantum-recoverable*: if discrete-log cryptography ever has to be switched off, a recovery protocol can still return Ironwood funds to their owners [ZIP 229, ZIP 2005]. At the same moment, the Orchard pool was sealed: value can leave it, but it cannot enter it, and an Orchard action may only send to the same address as the note it spends [ZIP 2006]. The practical effect is a one-way door from Orchard into Ironwood.
+Fixing the circuit closed the hole, but it didn't by itself restore confidence in the money already sitting in Orchard, and that is what **NU6.3** was for. It introduced a fourth shielded pool, **Ironwood**, activated on mainnet at height 3,428,143 [ZIP 258]. Ironwood reuses the Orchard protocol almost unchanged, but it starts with a clean state, its supply integrity was backed by formal verification from the start, and every note in it is *quantum-recoverable*: if discrete-log cryptography ever has to be switched off, a recovery protocol can still return Ironwood funds to their owners [ZIP 229, ZIP 2005]. At the same moment, the Orchard pool was sealed: value can leave it, but it cannot enter it, and an Orchard action may only send to the same address as the note it spends [ZIP 2006]. The practical effect is a one-way door from Orchard into Ironwood.
 
 The most recent upgrade, **NU7**, activated on mainnet at height 3,543,405 in November 2026 [Zebra 7.0.0 release]. It cut the block target spacing again, from 75 seconds to 25 seconds (ZIP 218), introduced per-block limits on shielded actions, and made version 4 transactions invalid. That last change quietly finishes Sprout: Sprout spends only exist in the v4 format, so once v4 is gone, Sprout funds have no transaction that can move them.
 
@@ -103,7 +104,7 @@ Now let's make the diagram move. Here is the life of one shielded payment, the o
 3. **Verify for the mempool.** The node checks the proof, every signature, that the anchor is a real past root, that no nullifier has been spent before, and that the fee meets policy. Only then does it enter the mempool.
 4. **Gossip.** The node relays it to peers. This is where a fee-policy disagreement between implementations can strand a transaction.
 5. **Mine.** A miner's block template includes it. Our specimen was mined at testnet height 4,412,453 in a block with exactly two transactions: the coinbase and our payment.
-6. **Commit.** Every node that accepts the block appends the new note commitments to the pool's tree, adds the nullifiers to the spent set, and updates the pool's value balance. Hold on to that last part.
+6. **Commit.** Every node that accepts the block appends the new note commitments to the pool's tree, adds the nullifiers to the spent set, and updates the pool's value balance. Keep that last part in mind, we come back to it in section 9.
 7. **Index.** The indexer reduces the block to a compact block: just the fields a wallet needs to detect its own payments.
 8. **Discover.** The recipient's wallet downloads compact blocks, tries to decrypt each output with its viewing key, and finds the one meant for it. Because compact blocks leave memos out, it then fetches the full transaction to read the memo.
 
@@ -129,7 +130,7 @@ I fetched the raw bytes from a public lightwallet server with a few lines of Rus
 
 *Fig 05. The whole transaction drawn to scale. Three quarters of it is one proof.*
 
-Before we zoom in, look at the proportions in Fig 05, because they teach the first lesson about cost. The header and counters are 26 bytes. The four shielded actions are 3,280 bytes. The proof is 11,808 bytes, 76% of everything. If you are ever asked why shielded transactions are larger than transparent ones, the honest one-line answer is: mostly the proof.
+Before we zoom in, take a second with the proportions in Fig 05, because they teach the first lesson about cost. The header and counters are 26 bytes. The four shielded actions are 3,280 bytes. The proof is 11,808 bytes, 76% of everything. So if anyone asks you why shielded transactions are so much larger than transparent ones, the honest one-line answer is that it's mostly the proof.
 
 ## 5. Reading the header: twenty bytes that pin the rules
 
@@ -166,7 +167,7 @@ A v6 transaction has a section for every pool: transparent, Sapling, Orchard and
 
 For contrast, here is the other transaction in the same block, the coinbase that paid the miner: one transparent input, two transparent outputs, and zeros everywhere else, 181 bytes in all. Its expiry height is exactly the block height, 4,412,453, which is the rule for coinbase transactions. Its input script even carries the mining pool's ASCII tag, `Foundry Zcash Pool #PrivacyMatters`. Same format, same header, entirely different shape: the format is a set of optional pool sections, and each transaction fills in the ones it uses.
 
-Now, why four actions for three suppliers? Because an action is not "one payment". **An action is a slot that can spend one note and create one note at the same time.** Three of the new notes go to the suppliers; the fourth is change returning to the vault. Where an action has nothing real to spend, the wallet fills the spend side with a dummy, so from outside every action looks the same. That uniformity is deliberate: an observer cannot count real spends or real recipients from the action count alone, only bound them.
+You might be wondering why three suppliers needed four actions. The thing to unlearn here is that an action equals one payment, because it doesn't. **An action is a slot that can spend one note and create one note at the same time.** Three of the new notes go to the suppliers; the fourth is change returning to the vault. Where an action has nothing real to spend, the wallet fills the spend side with a dummy, so from outside every action looks the same. That uniformity is deliberate: an observer cannot count real spends or real recipients from the action count alone, only bound them.
 
 ## 7. Inside one action: 820 bytes and who can read them
 
@@ -210,7 +211,7 @@ Three of these are worth your full attention.
 
 **The value balance is the fee, and you can check it.** `valueBalanceIronwood` is the net value leaving the Ironwood pool: spends minus outputs. Here that is +20,000 zatoshis. With no transparent outputs and no other pools involved, value leaving the shielded pool has only one place to go, the fee. Now check it against ZIP 317, which charges a marginal fee of 5,000 zatoshis per logical action with a floor of two "grace" actions: 5,000 × max(2, 4) = 20,000. And remember that our specimen shared its block only with the coinbase: the miner's output in that coinbase is 125,020,000 zatoshis, and the trailing 20,000 is our fee arriving on the other side. You have just followed a fee from one transaction into another.
 
-**The proof size is a formula, not a measurement.** ZIP 229 fixes it at 2,720 + 2,272 × n bytes for n actions, so four actions give 11,808 bytes, exactly what we read. For capacity planning this is wonderful news: a shielded transaction's size is predictable from its action count before you build it. It also explains why ZIP 317 prices by action and not by byte, and why NU7's new limits count shielded actions per block rather than bytes.
+**The proof size is a formula, not a measurement.** ZIP 229 fixes it at 2,720 + 2,272 × n bytes for n actions, so four actions give 11,808 bytes, exactly what we read. For capacity planning that's genuinely useful, because a shielded transaction's size is predictable from its action count before you build it. It also explains why ZIP 317 prices by action and not by byte, and why NU7's new limits count shielded actions per block rather than bytes.
 
 One more observation, and it is my favourite in the whole dissection. Corridor's lane also settled a batch from a **FROST 2-of-3 vault**, where no single server holds the spending key and two of three signers must cooperate (testnet transaction `878b44b8…`). I ran it through the same script. It is also 15,478 bytes, also four Ironwood actions, also a +20,000 fee, and its signatures are ordinary 64-byte signatures. Threshold custody leaves no trace in the transaction: the chain cannot tell a 2-of-3 vault from a single key. That is a privacy property and an operational one, and Lecture 6 builds on it.
 
