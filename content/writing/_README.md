@@ -27,6 +27,20 @@ publish: set `draft: false`, add a `date`, push. That is the whole deploy.
 
 Files starting with `_` (like this one) are ignored by the router.
 
+## What every post gets automatically
+
+- **Share card.** `scripts/og-images.mjs` draws a 1200×630 card (topic, title,
+  byline) into `public/writing/<slug>/og.png` on every build. That is what X,
+  LinkedIn, WhatsApp, Slack, Telegram and Discord show when the link is pasted.
+  The files are gitignored; run `npm run og` to regenerate them locally.
+- **Share buttons** at the top and bottom of the post: X, LinkedIn, Facebook,
+  WhatsApp, Telegram, Reddit, Hacker News, Bluesky, Threads, email, copy link,
+  and the phone's own share sheet (which reaches every other installed app).
+- **Section links.** Every heading has a `#` link; its URL points at that
+  section, so a reader can share one part of a long piece.
+- **RSS.** `https://udokaam.dev/feed.xml` carries the full text of every
+  published post, with absolute image URLs.
+
 ## Syndicating without giving away the ranking
 
 The point of writing here rather than on a platform is that the search value
@@ -45,7 +59,7 @@ Per platform:
 
 | Platform | How to set canonical |
 |---|---|
-| **Dev.to** | `canonical_url:` in the post's frontmatter. Best support of the four. |
+| **Dev.to** | Easiest: Settings → Extensions → "Publishing to DEV Community from RSS", feed `https://udokaam.dev/feed.xml`, tick "Mark the RSS source as the canonical URL by default". New posts arrive as drafts with the canonical set. Manually: `canonical_url:` in the post's frontmatter. |
 | **Hashnode** | "Original article URL" in post settings. |
 | **Medium** | Use the import tool at `medium.com/p/import` and paste the udokaam.dev URL — it sets the canonical for you. Pasting the text into a new story does **not**. |
 | **Substack** | Check the post settings for a canonical field before relying on one; it has historically not offered it. If there is none, publish an excerpt with a link back rather than the full text. |
