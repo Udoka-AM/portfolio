@@ -1,10 +1,46 @@
+/* --- layout ---------------------------------------------------------------
+   The article uses the full site measure and centres a reading column inside
+   it. Prose stays at a comfortable line length; figures and tables get a
+   wider track so diagram labels and multi-column tables stay legible. Both
+   tracks collapse to the screen width (minus gutters) on small viewports. */
+
 .post {
-  /* Prose wants a narrower column than the 1320px site measure. */
-  max-width: 68ch;
+  --prose: 700px;
+  --wide: 1080px;
+  --tracks: [wide-start] minmax(0, 1fr) [prose-start] minmax(0, var(--prose)) [prose-end]
+    minmax(0, 1fr) [wide-end];
+
+  display: grid;
+  grid-template-columns: var(--tracks);
   padding: 40px 0 96px;
 }
 
+.post > * {
+  grid-column: prose;
+  min-width: 0;
+}
+
+.post > .body {
+  grid-column: wide;
+  display: grid;
+  grid-template-columns: var(--tracks);
+}
+
+.body > * {
+  grid-column: prose;
+  min-width: 0;
+}
+
+.body > :global(figure),
+.body > :global(.table-scroll) {
+  grid-column: wide;
+  justify-self: center;
+  width: 100%;
+  max-width: var(--wide);
+}
+
 .back {
+  justify-self: start;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 11px;
   letter-spacing: 0.12em;
@@ -68,6 +104,81 @@
 .body {
   font-size: 16.5px;
   line-height: 1.68;
+  /* Long hashes, hex strings and URLs break rather than widen the page. */
+  overflow-wrap: break-word;
+}
+
+/* --- figures ---------------------------------------------------------------- */
+
+.body :global(figure) {
+  margin: 12px 0 36px;
+}
+
+.body :global(img) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.body :global(figure img) {
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+
+/* --- tables ----------------------------------------------------------------- */
+
+.body :global(.table-scroll) {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 4px 0 28px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+
+.body :global(table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* Four or more columns can't wrap down to a phone width and stay readable;
+   give them a floor and let the box scroll instead. */
+.body :global(table:has(th:nth-child(3))) {
+  min-width: 520px;
+}
+
+.body :global(table:has(th:nth-child(4))) {
+  min-width: 680px;
+}
+
+.body :global(th),
+.body :global(td) {
+  text-align: left;
+  vertical-align: top;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.body :global(tbody tr:last-child td) {
+  border-bottom: 0;
+}
+
+.body :global(th) {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--raise);
+  white-space: nowrap;
+}
+
+.body :global(td code) {
+  white-space: nowrap;
 }
 
 .body :global(h2) {
@@ -159,5 +270,32 @@
   }
   .body {
     font-size: 16px;
+  }
+  /* On phones, figures and tables run edge to edge so diagrams get every
+     pixel of the screen; the prose keeps its gutters. */
+  .body > :global(figure),
+  .body > :global(.table-scroll) {
+    width: calc(100% + 2 * var(--gutter));
+    max-width: none;
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+  .body :global(figure img) {
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+  .body :global(table) {
+    font-size: 14px;
+  }
+  .body :global(th),
+  .body :global(td) {
+    padding: 9px 12px;
+  }
+  .body :global(pre) {
+    padding: 14px;
   }
 }
