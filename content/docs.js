@@ -64,4 +64,12 @@ export const DOCS = [
     line:
       "A card-free payment taken on the Android phone a shopkeeper already owns — settled in USDC on Solana, shown to them in their own currency, and paid into their own bank by a payout partner.",
   },
+  {
+    name: "sealForge",
+    where: "sealforge.mintlify.app",
+    cta: "Read docs",
+    href: "https://sealforge.mintlify.app/overview",
+    line:
+      "Sealed-bid auctions on Zcash testnet: the SF1 protocol spec, FROST 2-of-3 trustee escrow, refund privacy, and how anyone recomputes an auction's result from the chain.",
+  },
 ];
