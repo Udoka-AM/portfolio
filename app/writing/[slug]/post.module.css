@@ -1,8 +1,8 @@
 /* --- layout ---------------------------------------------------------------
-   Two widths. Prose sits in a 900px reading column; figures, code blocks and
-   tables break out of it to a wider 1200px stage on desktop, so diagrams and
-   long lines of code get room without stretching the text past a comfortable
-   line length. Below ~1000px everything shares the one fluid column. Figures
+   One width. On desktop (>=1000px) the whole post - prose, headings,
+   figures, code blocks and tables - shares a 1200px stage, so text runs the
+   same width as the code and images. Below ~1000px everything shares the
+   one fluid 900px-max column. Figures
    stay sharp beyond their width through click-to-zoom (ImageZoom.jsx). */
 
 .post {
@@ -740,13 +740,17 @@
     /* The stage: up to --wide, never closer than a gutter to the window
        edge (the extra 16px leaves room for a classic scrollbar). */
     --bleed: min(var(--wide), calc(100vw - 2 * var(--gutter) - 16px));
+    /* The whole post takes the stage, so prose lines up edge to edge with
+       figures, code blocks and tables instead of sitting in a narrower
+       column inside them. */
+    max-width: var(--bleed);
   }
   .body :global(figure),
   .body :global(.code-block),
   .body :global(.table-scroll) {
-    width: var(--bleed);
+    width: 100%;
     max-width: none;
-    margin-left: calc(50% - var(--bleed) / 2);
+    margin-left: 0;
     margin-right: 0;
   }
   .body :global(.code-block) {
