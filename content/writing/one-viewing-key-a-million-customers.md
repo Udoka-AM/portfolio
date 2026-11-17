@@ -2,7 +2,8 @@
 title: "One viewing key, a million customers: account design, compact blocks and the real cost of finding incoming money"
 topic: "zcash from the protocol up · lecture 2"
 blurb: "Lecture 2 of a ten-part engineering series. We price shielded payment discovery from the account model down to the decryption loop, with compact blocks and trial-decryption timings measured on Zcash mainnet and testnet."
-draft: true
+date: 2026-11-17
+draft: false
 ---
 
 ![One viewing key, a million customers: what it costs a backend to find incoming money on Zcash](/writing/one-viewing-key-a-million-customers/cover.png)
@@ -11,7 +12,7 @@ draft: true
 
 That's today's question, and most engineers coming to Zcash answer it wrong the first time. The instinct from every other payments system is that cost follows addresses: a million customers means a million addresses means a million rows in an index, and an index lookup is cheap. On a shielded chain, that instinct points you at the wrong number. By the end of this lecture you will know which number to watch instead, you will have measured it on your own machine, and you will be able to size a scanner for a real workload before you write any of it.
 
-**Welcome back to "Zcash from the protocol up".** In Lecture 1 we followed one payment through the stack in eight steps, and I said step 8, *discover*, is where most of a wallet backend's cost lives. Today we price step 8. The running example is still the shielded lane I built for Corridor Finance, which pays suppliers privately on Zcash testnet and lets an auditor check one customer's payments with a viewing key. The contrast case is still sealForge, my sealed-bid auction system, also on testnet. Today they turn out to sit at opposite ends of the same design decision, which is useful, because it lets you see that the decision is a choice and not a law.
+**Welcome back to "Zcash from the protocol up".** In Lecture 1 we followed one payment through the stack in eight steps, and I said step 8, *discover*, is where most of a wallet backend's cost lives. Today we price step 8. The running example is still the shielded lane I built for Corridor Finance, which pays suppliers privately on Zcash testnet and lets an auditor check one customer's payments with a viewing key. The contrast case is still sealForge, my sealed-bid auction system, also on testnet. Today they turn out to sit at opposite ends of the same design decision, which is useful, because seeing both ends shows you it's a decision you get to make, with a price on each side.
 
 **How this class works.** Same as last time: history where it explains a design, then the mechanism, then something you run. Every number I give you today was either measured by me on 17 November 2026, with the command shown so you can repeat it, or comes from a ZIP or a source file I name. Where I'm making a judgement rather than reporting a measurement, I'll say so.
 
@@ -30,7 +31,7 @@ You need Lecture 1, or the equivalent: what a shielded action is, that its 580-b
 
 You still don't need curve arithmetic. I'll tell you which operation is expensive and roughly why, and then we'll treat it as a measured constant, which is how you treat it in production anyway.
 
-**What you will be able to do by the end.** Five outcomes:
+**What you will be able to do by the end.** There are five outcomes, and we'll check them off at the end:
 
 1. Explain why detection cost on Zcash grows with the number of viewing keys you watch, and not with the number of addresses you hand out.
 2. Derive a fresh address per customer or per invoice from one account, and map an incoming payment back to it.
@@ -85,7 +86,7 @@ A  shielded actions and outputs in the block
 t  time for one trial on one core
 ```
 
-There's no term for addresses in that formula. That's the flip. On the transparent pool, cost grows with the number of addresses you index. On the shielded pools, cost grows with the number of keys you hold, times the size of the chain, and it doesn't care how many addresses each key has handed out.
+Notice there's no term for addresses in that formula, and that's the whole flip: on the transparent pool, cost grows with the number of addresses you index. On the shielded pools, cost grows with the number of keys you hold, times the size of the chain, and it doesn't care how many addresses each key has handed out.
 
 The `I = 2` comes from how wallets use keys. Each account has an *external* incoming viewing key, for addresses you give to other people, and an *internal* one, for change sent back to yourself. A wallet has to try both, and librustzcash's scanner does exactly that: look for the `for scope in [Scope::External, Scope::Internal]` loops in `zcash_client_backend/src/scanning.rs`. If you only ever receive and never send from an account, you could skip the internal key, but most backends send, so count two.
 
@@ -144,7 +145,7 @@ A `CompactBlock` has the block's `height`, `hash`, `prevHash` and `time`, an emp
 | `ironwood_actions` | `CompactOrchardAction` | 148 | Ironwood, the same message type as Orchard |
 | `vin`, `vout` | `CompactTxIn`, `TxOut` | prevout, or value plus script | Transparent data, only if you ask for it |
 
-Two things stand out. First, a compact action is 148 bytes against the full action's 820, so about 18%: the scanner gets the ephemeral key it needs for step 1 of Fig 02, the 52 bytes it needs for step 3 and the `cmx` it needs for step 5, and nothing else. The other 672 bytes, which include the rest of the ciphertext with the memo and the 80-byte `outCiphertext`, stay on the server. Second, transparent data is opt-in: the `BlockRange` request has a `pool_types` field, and if you leave it empty the server returns shielded data only. When I first measured this I saw `vin=0 vout=0` across five thousand blocks and briefly thought I'd found a bug, but no, that's the default.
+Two things stand out. First, a compact action is 148 bytes against the full action's 820, so about 18%: the scanner gets the ephemeral key it needs for step 1 of Fig 02, the 52 bytes it needs for step 3 and the `cmx` it needs for step 5, and nothing else. The other 672 bytes, which include the rest of the ciphertext with the memo and the 80-byte `outCiphertext`, stay on the server. Second, transparent data is opt-in: the `BlockRange` request has a `pool_types` field, and if you leave it empty the server returns shielded data only. So if you measure this yourself and see `vin=0 vout=0` across five thousand blocks like I did, nothing is broken, that's just the default at work.
 
 ![Fig 05. A full action against a compact action, and a CompactBlock's layout](/writing/one-viewing-key-a-million-customers/fig-05.png)
 
