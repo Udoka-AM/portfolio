@@ -210,7 +210,7 @@ Independence is the point of the check, and it's narrower than it looks. Those t
 
 Now put it together for a backend. Everything that's bad about public indexers for a payout backend comes from two facts: the operator sees the requests that name your transactions, and you can't check a server you depend on without a second, independent one. Both are fixed by running the indexer yourself, and that's the makeshift component for this lecture: an **indexer gateway**.
 
-![Fig 06. The lane's indexer gateway](/writing/the-indexer-layer-what-a-lightwallet-server-learns/fig-06.png)
+![Fig 06. The lane's indexer gateway](/writing/the-indexer-layer-what-a-lightwallet-server-learns/fig-06-gateway.png)
 
 *Fig 06. The scanner from Lecture 2 reads only from the backend's own indexer, which reads from two validators running different implementations. Second fetches and sends never leave the backend. A cross-checker compares sampled blocks against one public server, which only ever sees requests for blocks.*
 
