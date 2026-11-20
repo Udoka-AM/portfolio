@@ -2,7 +2,8 @@
 title: "The indexer layer: what one lightwallet server costs, what it learns about each wallet, and when to run your own"
 topic: "zcash from the protocol up · lecture 3"
 blurb: "Lecture 3 of a ten-part engineering series. We measure what one wallet session costs a Zcash indexer, work out how many wallets one server can carry, list what each request tells the server, and check two independent servers against each other on mainnet."
-draft: true
+date: 2026-11-20
+draft: false
 ---
 
 ![The indexer layer: what one lightwallet server costs, what it learns about each wallet, and when to run your own](/writing/the-indexer-layer-what-a-lightwallet-server-learns/cover.png)
